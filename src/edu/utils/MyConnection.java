@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class MyConnection {
 
-    public String url = "jdbc:mysql://localhost:3306/tanwichette";
+    public String url = "jdbc:mysql://localhost:3306/tanwichette?zeroDateTimeBehavior=convertToNull";
     public String login = "root";
     public String pwd = "";
     Connection cnx;

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="688.0" prefWidth="1046.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.projet.gui.ReclamationsAdminController">
+   <children>
+      <TableView fx:id="ReclamationView" layoutX="20.0" layoutY="70.0" prefHeight="548.0" prefWidth="1006.0">
+        <columns>
+          <TableColumn fx:id="RId" prefWidth="75.0" style="-fx-alignment: center;" text="ID" />
+          <TableColumn fx:id="RNomClient" prefWidth="150.0" style="-fx-alignment: center;" text="NomClient" />
+            <TableColumn fx:id="Rmail" prefWidth="200.0" style="-fx-alignment: center;" text="EmailClient" />
+            <TableColumn fx:id="Rdescription" prefWidth="300.0" style="-fx-alignment: center;" text="Description" />
+            <TableColumn fx:id="Rdate" prefWidth="150.0" style="-fx-alignment: center;" text="Date" />
+            <TableColumn fx:id="Rsolved" prefWidth="130.0" style="-fx-alignment: center;" text="IsSolved" />
+        </columns>
+      </TableView>
+      <ButtonBar layoutX="374.0" layoutY="618.0" prefHeight="40.0" prefWidth="299.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="225.0" text="Supprimer" />
+            <Button mnemonicParsing="false" onAction="#Solved" text="Solved" />
+        </buttons>
+      </ButtonBar>
+      <Pane layoutX="-7.0" layoutY="39.0" prefHeight="5.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reclamations">
+         <font>
+            <Font name="Yu Gothic UI Semilight" size="27.0" />
+         </font>
+      </Text>
+      <Button layoutX="978.0" layoutY="12.0" mnemonicParsing="false" onAction="#Close" text="Fermer" textFill="#fc2121">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

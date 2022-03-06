@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="487.0" prefWidth="341.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.projet.gui.ModifierProduitController">
+   <children>
+      <TextField fx:id="PName" layoutX="122.0" layoutY="118.0" />
+      <TextField fx:id="PUnite" layoutX="122.0" layoutY="173.0" />
+      <TextField fx:id="PQuantite" layoutX="122.0" layoutY="232.0" />
+      <TextField fx:id="PPrixUnitaire" layoutX="123.0" layoutY="344.0" />
+      <ChoiceBox fx:id="Categorie" layoutX="122.0" layoutY="286.0" prefWidth="150.0" />
+      <Label layoutX="50.0" layoutY="290.0" text="Categorie :" />
+      <Label layoutX="54.0" layoutY="122.0" text="Nom :" />
+      <Label layoutX="54.0" layoutY="177.0" text="Unite : " />
+      <Label layoutX="47.0" layoutY="236.0" text="Quantite :" />
+      <Label layoutX="45.0" layoutY="348.0" text="Prix unitaire :" />
+      <Text layoutX="11.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detailles Produit">
+         <font>
+            <Font name="Yu Gothic UI Semilight" size="25.0" />
+         </font>
+      </Text>
+      <Pane layoutX="23.0" layoutY="49.0" prefHeight="5.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <ButtonBar layoutX="1.0" layoutY="396.0" prefHeight="91.0" prefWidth="331.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#Enregistrer" prefHeight="25.0" prefWidth="276.0" style="-fx-background-color: #00E676;" text="Enregistrer" />
+            <Button mnemonicParsing="false" onAction="#Effacer" prefHeight="25.0" style="-fx-background-color: #FFFF00;" text="Effacer" />
+        </buttons>
+      </ButtonBar>
+      <Button layoutX="271.0" layoutY="12.0" mnemonicParsing="false" onAction="#close" text="Fermer" textFill="#f51212">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>
