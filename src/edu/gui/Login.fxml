@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.auth.LoginController">
+    <children>
+      <AnchorPane layoutX="275.0" layoutY="33.0" prefHeight="334.0" prefWidth="311.0">
+         <children>
+            <TextField fx:id="email" layoutX="92.0" layoutY="129.0" promptText="Email" />
+            <PasswordField fx:id="pwd" layoutX="92.0" layoutY="167.0" promptText="mot de passe" />
+            <Button fx:id="btn_login" layoutX="111.0" layoutY="212.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="112.0" text="Connecter" />
+            <Label alignment="CENTER" layoutX="81.0" layoutY="27.0" onMouseClicked="#Inscription" prefHeight="30.0" prefWidth="171.0" text="Connectez-Vous" textAlignment="CENTER" textFill="#0d0d0d">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="motOublier" layoutX="108.0" layoutY="257.0" onMouseClicked="#mdpOublier" text="Mot de passe oublier?" />
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="18.0" text="Bienvenue à Tanwichette">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="btn_inscrire" layoutX="110.0" layoutY="244.0" mnemonicParsing="false" onAction="#Inscrit" text="Inscrire" />
+      <ImageView fitHeight="182.0" fitWidth="271.0" layoutX="14.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@slogan.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

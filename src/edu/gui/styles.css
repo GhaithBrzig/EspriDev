@@ -1,0 +1,18 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 4 mars 2022, 14:28:09
+    Author     : iheb
+*/
+.parent{
+    -fx-background-color: transparent;
+    .anchor {
+    -fx-background-image:url('file:C:\Users\iheb\Documents\NetBeansProjects\AuthentG\src\edu\gui\auth\slogan.pngf');
+}
+    
+    
+}
+
