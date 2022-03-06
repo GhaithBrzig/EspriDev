@@ -12,6 +12,7 @@ import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -25,13 +26,13 @@ import javafx.stage.Stage;
  *
  * @author gayth
  */
-public class FXmain extends Application {
+public class NewFXMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
         try {
 
-            Parent root = FXMLLoader.load(getClass().getResource("AjouterProduit.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("AjouterPersonne.fxml"));
             Scene scene = new Scene(root, 1100, 700);
             primaryStage.setTitle("Ajouter Produit");
             primaryStage.setScene(scene);
@@ -41,7 +42,7 @@ public class FXmain extends Application {
             time.schedule(st, 0, 1000*60*60*24); // Create Repetitively task for every 1 secs
 
         } catch (IOException ex) {
-            Logger.getLogger(FXmain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewFXMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

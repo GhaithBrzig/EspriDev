@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="564.0" prefWidth="369.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.projet.gui.InterfaceReclamationController">
+<AnchorPane id="AnchorPane" prefHeight="564.0" prefWidth="369.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.gui.InterfaceReclamationController">
    <children>
       <Label layoutX="32.0" layoutY="74.0" text="Nom du client  ">
          <font>

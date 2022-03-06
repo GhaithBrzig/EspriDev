@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="487.0" prefWidth="341.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.projet.gui.ModifierProduitController">
+<AnchorPane id="AnchorPane" prefHeight="487.0" prefWidth="341.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.gui.ModifierProduitController">
    <children>
       <TextField fx:id="PName" layoutX="122.0" layoutY="118.0" />
       <TextField fx:id="PUnite" layoutX="122.0" layoutY="173.0" />

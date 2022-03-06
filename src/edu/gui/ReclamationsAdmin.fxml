@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="688.0" prefWidth="1046.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.projet.gui.ReclamationsAdminController">
+<AnchorPane id="AnchorPane" prefHeight="688.0" prefWidth="1046.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.ReclamationsAdminController">
    <children>
       <TableView fx:id="ReclamationView" layoutX="20.0" layoutY="70.0" prefHeight="548.0" prefWidth="1006.0">
         <columns>
