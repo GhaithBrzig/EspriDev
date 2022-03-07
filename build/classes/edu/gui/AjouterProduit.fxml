@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="705.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.AjouterProduitController">
+   <children>
+      <TableView fx:id="StockView" layoutX="301.0" layoutY="99.0" prefHeight="430.0" prefWidth="739.0">
+        <columns>
+            <TableColumn fx:id="ColId" minWidth="15.0" prefWidth="120.0" style="-fx-alignment: center;" text="id" />
+          <TableColumn fx:id="ColNom" minWidth="15.0" prefWidth="120.0" style="-fx-alignment: center;" text="Nom" />
+          <TableColumn fx:id="ColUnite" prefWidth="87.0" style="-fx-alignment: center;" text="Unite" />
+            <TableColumn fx:id="ColQuantite" prefWidth="85.0" style="-fx-alignment: center;" text="Quantite" />
+            <TableColumn fx:id="ColCategorie" prefWidth="120.0" style="-fx-alignment: center;" text="Categorie" />
+            <TableColumn fx:id="ColPrix" prefWidth="100.0" style="-fx-alignment: center;" text="Prix unitaire" />
+            <TableColumn fx:id="ColPrixT" prefWidth="120.0" style="-fx-alignment: center;" text="Prix Total" />
+        </columns>
+      </TableView>
+      <TextField fx:id="PName" layoutX="91.0" layoutY="175.0" />
+      <TextField fx:id="PUnite" layoutX="91.0" layoutY="230.0" />
+      <TextField fx:id="PQuantite" layoutX="91.0" layoutY="289.0" />
+      <TextField fx:id="PPrixUnitaire" layoutX="92.0" layoutY="401.0" />
+      <Button layoutX="106.0" layoutY="494.0" mnemonicParsing="false" onAction="#Btnajout" text="Enregistrer">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <ChoiceBox fx:id="Categorie" layoutX="91.0" layoutY="343.0" prefWidth="150.0" />
+      <Label layoutX="19.0" layoutY="347.0" text="Categorie :" />
+      <Label layoutX="23.0" layoutY="179.0" text="Nom :" />
+      <Label layoutX="23.0" layoutY="234.0" text="Unite : " />
+      <Label layoutX="16.0" layoutY="293.0" text="Quantite :" />
+      <Label layoutX="14.0" layoutY="405.0" text="Prix unitaire :" />
+      <ButtonBar layoutX="542.0" layoutY="541.0" prefHeight="40.0" prefWidth="159.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#DeleteRow" text="Supprimer" />
+            <Button mnemonicParsing="false" onAction="#Update" text="Modifier" />
+        </buttons>
+      </ButtonBar>
+      <Pane layoutY="50.0" prefHeight="5.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Text layoutX="23.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock">
+         <font>
+            <Font name="Yu Gothic UI Semilight" size="33.0" />
+         </font>
+      </Text>
+      <Button layoutX="962.0" layoutY="14.0" mnemonicParsing="false" onAction="#Close" text="Fermer" textFill="#fc2121">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

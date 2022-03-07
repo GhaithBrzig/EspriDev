@@ -62,7 +62,7 @@ public class ReiniController implements Initializable {
         
         if (newPwd.getText().equals(verifNewMdp.getText())) {
            
-                String updateQuerry = "UPDATE log set mdp = ? where email = ?";
+                String updateQuerry = "UPDATE login set mdp = ? where email = ?";
                 ps = cnx2.prepareStatement(updateQuerry);
                 ps.setString(1, newPwd.getText());
                 ps.setString(2, email);

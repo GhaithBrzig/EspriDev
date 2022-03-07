@@ -63,18 +63,18 @@ public class InscriptionController implements Initializable {
 
     @FXML
     private void inscrireP(ActionEvent event) throws SQLException {
-        String verifAccount = "Select * from log where email = ?";
+        String verifAccount = "Select * from login where email = ?";
         PreparedStatement ps = cnx2.prepareStatement(verifAccount);
         ps.setString (1,email.getText());
         boolean b = false; 
         b = ps.execute();
-        if(b){
+      /*  if(b){
         JOptionPane.showMessageDialog(null, "Compte déjà existe");
-            }
-        else{
+            }**/
+      //  else{
         try {
 
-            String requete = " INSERT INTO log (id, nom, prenom, numtel,dn, email, mdp) VALUES (?,?,?,?,?,?,?)";
+            String requete = " INSERT INTO login (id, nom, prenom, numtel,dn, email, mdp) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement pstt = cnx2.prepareStatement(requete);
             Utilisateur p = new Utilisateur();
             pstt.setInt(1, p.getId_util());
@@ -110,7 +110,7 @@ public class InscriptionController implements Initializable {
         }
         
 
-    }
+    
     }
 
     @FXML

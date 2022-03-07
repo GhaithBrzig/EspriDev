@@ -73,13 +73,12 @@ public class LoginController implements Initializable {
             this.i = this.i +1 ;
 
         try {
-            String sql = "SELECT * FROM log where email like ? AND mdp like ? ";
+            String sql = "SELECT * FROM login where email LIKE '"+email.getText()+"' AND mdp like  '"+pwd.getText() +"'";
             ps = con.prepareCall(sql);
             Utilisateur p = new Utilisateur();
-            ps.setString(1, email.getText());
-            ps.setString(2, pwd.getText());
             boolean b = false; 
             b = ps.execute();
+            rs = ps.executeQuery(sql);
             if (b){
             
              String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -112,9 +111,11 @@ public class LoginController implements Initializable {
                 
                 }
                 else {
+                    
                     if (rs.next()) {
 
                         JOptionPane.showMessageDialog(null, "Connexion etablie");
+                        
 
                         btn_login.getScene().getWindow().hide();
 
@@ -158,7 +159,7 @@ public class LoginController implements Initializable {
 
            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Email ou mot de passe incorrecte!");
+            JOptionPane.showMessageDialog(null, e);
 
 
             if ((this.i) % 3 == 0) {

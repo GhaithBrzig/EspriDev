@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,7 +93,7 @@ public class ListPersonnelController implements Initializable {
 
         loader.load();
         ListModifierController updateProfil = loader.getController();
-        updateProfil.setTextField(p.getNom(), p.getPrenom(), p.getNumtel(), p.getEmail(), p.getDn().toLocalDate());
+        updateProfil.setTextField(p.getNom(), p.getPrenom(), p.getNumtel(), p.getEmail(), p.getDn().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         Parent parent = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(parent));
@@ -127,7 +128,7 @@ public class ListPersonnelController implements Initializable {
     void getData() {
         try {
             PersonneList.clear();
-            querry = "SELECT id, nom, prenom ,numtel, dn  ,email , role FROM log";
+            querry = "SELECT id, nom, prenom ,numtel, dn  ,email , role FROM login";
             ps = con.prepareStatement(querry);
             rs = ps.executeQuery();
             while (rs.next()) {

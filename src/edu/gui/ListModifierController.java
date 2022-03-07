@@ -93,7 +93,7 @@ public class ListModifierController implements Initializable {
 
         try {
 
-            String requete = "UPDATE log set nom = ?, prenom = ?, numtel = ?, email = ?, dn = ?, role = ?  where email = ?  ";
+            String requete = "UPDATE login set nom = ?, prenom = ?, numtel = ?, email = ?, dn = ?, role = ?  where email = ?  ";
             PreparedStatement pstt = cnx2.prepareStatement(requete);
             Utilisateur p = new Utilisateur();
             pstt.setString(1, nom.getText());

@@ -82,10 +82,12 @@ public class AjouterPersonneController implements Initializable {
            
        String role =  combo_role.getSelectionModel().getSelectedItem();
        if (role == null)
-            role = "C";
+            role = "CLIENT";
        try {
 
-            String requete = " INSERT INTO log (id, nom, prenom, numtel,dn, email, mdp,role) VALUES (?,?,?,?,?,?,?,?)";
+            String requete = " INSERT INTO login"
+                    + ""
+                    + " (id, nom, prenom, numtel,dn, email, mdp,role) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement pstt = cnx2.prepareStatement(requete);
             Utilisateur p = new Utilisateur();
             pstt.setInt(1, p.getId_util());

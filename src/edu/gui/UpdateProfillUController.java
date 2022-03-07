@@ -64,7 +64,7 @@ public class UpdateProfillUController implements Initializable {
      cnx2 = MyConnection.getInstance().getCnx();
         
            try {
-            String request = "UPDATE log set nom = ?, prenom = ?,dn = ? where email = ?  ";
+            String request = "UPDATE login set nom = ?, prenom = ?,dn = ? where email = ?  ";
             PreparedStatement pst = cnx2.prepareStatement(request);
             pst.setString(1, name.getText());
             pst.setString(2, prenom.getText());
