@@ -4,7 +4,8 @@
  */
 package edu.services;
 
-import entities.Produit;
+import edu.entities.Produit;
+import edu.entities.ProduitM;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,8 @@ import java.util.List;
  */
 public class GestionRemise {
 
-    List<Produit> l;
-    List<Produit> l2;
+    List<ProduitM> l;
+    List<ProduitM> l2;
     ProduitCRUD pcr;
     double taux;
 
@@ -23,7 +24,7 @@ public class GestionRemise {
         pcr = new ProduitCRUD();
         l = pcr.GetProd();
         l2 = clone(l);
-        for (Produit p : l2) {
+        for (ProduitM p : l2) {
 
             if (!p.getRemise().equals("0%")) {
                 p.setPrix_prod(p.getPrix_prod() - (p.getPrix_prod() * Integer.parseInt(p.getRemise().replace("%", ""))) * 0.01);
@@ -40,7 +41,7 @@ public class GestionRemise {
 
         if (tax > 0 && tax < 20) {
 
-            for (Produit e : l2) {
+            for (ProduitM e : l2) {
 
                 e.setPrix_prod(e.getPrix_prod() - (e.getPrix_prod() * (tax * 0.01)));
                 taux = tax;
@@ -54,19 +55,19 @@ public class GestionRemise {
     public void displayProd() {
         System.out.println("\nAvant le Remise");
 
-        for (Produit e : l) {
+        for (ProduitM e : l) {
             System.out.println(e);
         }
         System.out.println("\nApres le Remise");
-        for (Produit e : l2) {
+        for (ProduitM e : l2) {
             System.out.println(e);
         }
     }
 
-    public List<Produit> clone(List<Produit> lo) {
-        List<Produit> lc = new ArrayList();
-        for (Produit e : lo) {
-            Produit p = new Produit();
+    public List<ProduitM> clone(List<ProduitM> lo) {
+        List<ProduitM> lc = new ArrayList();
+        for (ProduitM e : lo) {
+            ProduitM p = new ProduitM();
             p.setId_prod(e.getId_prod());
             p.setLib_prod(e.getLib_prod());
             p.setDescription(e.getDescription());
@@ -79,18 +80,18 @@ public class GestionRemise {
         return lc;
     }
 
-    public List<Produit> getListB() {
+    public List<ProduitM> getListB() {
         return l2;
     }
 
-    public List<Produit> getListA() {
+    public List<ProduitM> getListA() {
         return l;
     }
 
     public void ReDefine() {
         l = pcr.GetProd();
         l2 = clone(l);
-        for (Produit p : l2) {
+        for (ProduitM p : l2) {
 
             if (!p.getRemise().equals("0%")) {
                 p.setPrix_prod(p.getPrix_prod() - (p.getPrix_prod() * Integer.parseInt(p.getRemise().replace("%", ""))) * 0.01);

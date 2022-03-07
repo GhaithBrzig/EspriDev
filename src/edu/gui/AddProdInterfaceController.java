@@ -5,8 +5,8 @@
  */
 package edu.gui;
 
-import entities.Produit;
-import entities.User;
+import edu.entities.Produit;
+import edu.entities.ProduitM;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -44,10 +44,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import services.GestionRemise;
-import services.ProduitCRUD;
-import services.UserCRUD;
-import utils.Mailing;
+import edu.services.GestionRemise;
+import edu.services.ProduitCRUD;
+import edu.utils.JavaMailUtil;
 
 /**
  * FXML Controller class
@@ -70,7 +69,7 @@ public class AddProdInterfaceController implements Initializable {
     ProduitCRUD pcr = new ProduitCRUD();
 
     GestionRemise Gr = new GestionRemise();
-    List<Produit> l = Gr.getListB();
+    List<ProduitM> l = Gr.getListB();
 
     ObservableList<String> items = FXCollections.observableArrayList("Breakfast", "Plat", "Sandiwch", "Pizza", "Boisson", "Autre");
     ObservableList<String> prom = FXCollections.observableArrayList("0", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%");
@@ -80,19 +79,19 @@ public class AddProdInterfaceController implements Initializable {
     private Button Image_btn;
     File selectedFile;
     @FXML
-    private TableView<Produit> Table_V;
+    private TableView<ProduitM> Table_V;
     @FXML
-    private TableColumn<Produit, String> Rep_col;
+    private TableColumn<ProduitM, String> Rep_col;
     @FXML
-    private TableColumn<Produit, String> desc_col;
+    private TableColumn<ProduitM, String> desc_col;
     @FXML
-    private TableColumn<Produit, String> prix_col;
+    private TableColumn<ProduitM, String> prix_col;
     @FXML
-    private TableColumn<Produit, String> Qte_col;
+    private TableColumn<ProduitM, String> Qte_col;
     @FXML
-    private TableColumn<Produit, String> prom_col;
+    private TableColumn<ProduitM, String> prom_col;
     @FXML
-    private TableColumn<Produit, String> cate_col;
+    private TableColumn<ProduitM, String> cate_col;
 
     /**
      * Initializes the controller class.
@@ -108,12 +107,12 @@ public class AddProdInterfaceController implements Initializable {
         Remise_cb.setItems(prom);
         Remise_cb.getSelectionModel();
         
-                Rep_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("lib_prod"));
-        desc_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
-        prix_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("prix_prod"));
-        prom_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("remise"));
-        cate_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("categorie"));
-        Qte_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("quaniteDispo"));
+                Rep_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("lib_prod"));
+        desc_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("description"));
+        prix_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("prix_prod"));
+        prom_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("remise"));
+        cate_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("categorie"));
+        Qte_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("quaniteDispo"));
         Table_V.getItems().setAll(l);
 
     }
@@ -122,7 +121,7 @@ public class AddProdInterfaceController implements Initializable {
     private void AddProduct(ActionEvent event) throws IOException {
         boolean checkexist = false;
 
-        for(Produit p : l)
+        for(ProduitM p : l)
         {
             if(p.getLib_prod().equals(lib_txt.getText()))
                 checkexist = true;
@@ -148,11 +147,11 @@ public class AddProdInterfaceController implements Initializable {
                     String categorie = Cat_List.getValue();
 
                     //inseretion dans la bd
-                    Produit p = new Produit(lib, Description, price, quantity, categorie);
+                    ProduitM p = new ProduitM(lib, Description, price, quantity, categorie);
 
                     if (Remise_cb.getValue() != null) {
                         p.setRemise(Remise_cb.getValue());
-                        if (Integer.parseInt(Remise_cb.getValue().replace("%", "")) >= 50) {
+                      /*  if (Integer.parseInt(Remise_cb.getValue().replace("%", "")) >= 50) {
                             UserCRUD ucr = new UserCRUD();
                             List<User> lu = ucr.GetProd();
                             System.out.println("test");
@@ -162,7 +161,7 @@ public class AddProdInterfaceController implements Initializable {
                                     Mailing.sendMail(u.getEmail(), p.getLib_prod() + "a un remise de " + p.getRemise(), "Remise");
                                 }
                             }
-                        }
+                        }*/
                     }
 
                     try {
@@ -171,7 +170,7 @@ public class AddProdInterfaceController implements Initializable {
 
                         
                         from = Paths.get(selectedFile.toURI());
-                        to = Paths.get("C:\\Users\\Nour\\Documents\\NetBeansProjects\\MyProject\\src\\GUI\\Photos\\" + lib + ".png");
+                        to = Paths.get("C:\\Users\\gayth\\OneDrive\\Documents\\NetBeansProjects\\Tanwichette\\src\\edu\\gui\\Photos\\" + lib + ".png");
                         Files.copy(from, to);
                         p.setPath(to.toString());
                     } catch (Exception e) {
@@ -207,7 +206,7 @@ public class AddProdInterfaceController implements Initializable {
     {
                 boolean checkexist = false;
 
-        for(Produit p : l)
+        for(ProduitM p : l)
         {
             if(p.getLib_prod().equals(lib_txt.getText()))
                 checkexist = true;
@@ -224,7 +223,7 @@ public class AddProdInterfaceController implements Initializable {
 
                 String Description = Desc_txt.getText();
                 String categorie = Cat_List.getValue();
-                Produit p = new Produit(lib, Description, categorie);
+                ProduitM p = new ProduitM(lib, Description, categorie);
 
                 if (!price_txt.getText().equals("") && !quantity_txt.getText().equals("")) {
 
@@ -384,7 +383,7 @@ public class AddProdInterfaceController implements Initializable {
       return data;
    }*/
 
-        for (Produit i : l) {
+        for (ProduitM i : l) {
 
             as.getData().add(new XYChart.Data<>(i.getLib_prod(), Double.valueOf(i.getQuaniteDispo())));
             /* bs.getData().add(new XYChart.Data<>

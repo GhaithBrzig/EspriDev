@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.MainInterController">
+   <content>
+      <AnchorPane prefHeight="594.0" prefWidth="589.0">
+         <children>
+            <ImageView fitHeight="599.0" fitWidth="600.0">
+               <image>
+                  <Image url="@Photos/Ph2.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="32.0" layoutY="28.0" prefHeight="79.0" prefWidth="662.0" style="-fx-background-color: #fafafa;">
+               <children>
+                  <ComboBox fx:id="categ_cb" layoutX="27.0" layoutY="26.0" onAction="#groupBy" prefHeight="28.0" prefWidth="136.0" promptText="Catégorie" />
+                  <ComboBox fx:id="sort_cb" layoutX="289.0" layoutY="26.0" onAction="#sortBy" prefHeight="28.0" prefWidth="136.0" promptText="Sort By" />
+               </children>
+            </Pane>
+            <TableView fx:id="Main_Table" layoutX="32.0" layoutY="107.0" prefHeight="482.0" prefWidth="662.0" style="-fx-border-color: black;">
+              <columns>
+                <TableColumn fx:id="Rep_col" prefWidth="105.0" text="Repa" />
+                <TableColumn fx:id="desc_col" prefWidth="160.0" text="Description" />
+                  <TableColumn fx:id="prix_col" prefWidth="79.0" text="Prix" />
+                  <TableColumn fx:id="prom_col" prefWidth="79.0" text="Promotion" />
+                  <TableColumn fx:id="cate_col" prefWidth="79.0" text="Categorie" />
+                  <TableColumn fx:id="Image_col" prefWidth="158.0" text="Image" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

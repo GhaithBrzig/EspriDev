@@ -4,8 +4,8 @@
  */
 package edu.gui;
 
-import entities.Images;
-import entities.Produit;
+import edu.entities.Produit;
+import edu.entities.ProduitM;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
-import services.GestionRemise;
-import services.ProduitCRUD;
+import edu.services.GestionRemise;
+import edu.services.ProduitCRUD;
 
 /**
  * FXML Controller class
@@ -36,17 +36,17 @@ import services.ProduitCRUD;
 public class MainInterController implements Initializable {
 
     @FXML
-    private TableView<Produit> Main_Table;
+    private TableView<ProduitM> Main_Table;
     @FXML
-    private TableColumn<Produit, String> Rep_col;
+    private TableColumn<ProduitM, String> Rep_col;
     @FXML
-    private TableColumn<Produit, String> desc_col;
+    private TableColumn<ProduitM, String> desc_col;
     @FXML
-    private TableColumn<Produit, String> prix_col;
+    private TableColumn<ProduitM, String> prix_col;
     @FXML
-    private TableColumn<Produit, String> prom_col;
+    private TableColumn<ProduitM, String> prom_col;
     @FXML
-    private TableColumn<Produit, String> cate_col;
+    private TableColumn<ProduitM, String> cate_col;
     @FXML
     private ComboBox<String> categ_cb;
     @FXML
@@ -56,10 +56,9 @@ public class MainInterController implements Initializable {
     ObservableList<String> sortitems = FXCollections.observableArrayList("Prix", "Promotions", "Nom");
 
     GestionRemise Gr = new GestionRemise();
-    List<Produit> l = Gr.getListB();
-    List<Produit> lb = Gr.getListA();
-    @FXML
-    private TableColumn<Images, ImageView> Image_col;
+    List<ProduitM> l = Gr.getListB();
+    List<ProduitM> lb = Gr.getListA();
+   
 
     /**
      * Initializes the controller class.
@@ -77,26 +76,26 @@ public class MainInterController implements Initializable {
 
         Gr.taxPerProd(10);
 
-        Rep_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("lib_prod"));
-        desc_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
-        prix_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("prix_prod"));
-        prom_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("remise"));
-        cate_col.setCellValueFactory(new PropertyValueFactory<Produit, String>("categorie"));
+        Rep_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("lib_prod"));
+        desc_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("description"));
+        prix_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("prix_prod"));
+        prom_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("remise"));
+        cate_col.setCellValueFactory(new PropertyValueFactory<ProduitM, String>("categorie"));
         Main_Table.getItems().setAll(l);
 
-        Images Im = new Images();
+   
 
         // Image_col.setCellFactory((Callback<TableColumn<Images, ImageView>, TableCell<Images, ImageView>>) Im.getProd_images());
     }
 
     @FXML
     private void groupBy(ActionEvent event) {
-        List<Produit> l2 = new ArrayList();
+        List<ProduitM> l2 = new ArrayList();
         if (categ_cb.getValue().equals("Tout")) {
             Main_Table.getItems().setAll(l);
         }
         else{
-        for (Produit p : l) {
+        for (ProduitM p : l) {
             if (p.getCategorie().equals(categ_cb.getValue())) {
                 l2.add(p);
             }
@@ -106,7 +105,7 @@ public class MainInterController implements Initializable {
 
     @FXML
     private void sortBy(ActionEvent event) {
-        TreeSet<Produit> ts = null;
+        TreeSet<ProduitM> ts = null;
         if (sort_cb.getValue().equals("Nom")) {
             ts = l.stream().collect(Collectors.toCollection(() -> new TreeSet<>((a, b) -> a.getLib_prod().compareTo(b.getLib_prod()))));
         } else if (sort_cb.getValue().equals("Prix")) {
