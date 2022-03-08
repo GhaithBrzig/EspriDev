@@ -34,7 +34,7 @@
             <Font name="Yu Gothic UI Semilight" size="27.0" />
          </font>
       </Text>
-      <Button layoutX="978.0" layoutY="12.0" mnemonicParsing="false" onAction="#Close" text="Fermer" textFill="#fc2121">
+      <Button fx:id="btn_back" layoutX="978.0" layoutY="12.0" mnemonicParsing="false" onAction="#Close" text="Fermer" textFill="#fc2121">
          <effect>
             <DropShadow />
          </effect>

@@ -30,7 +30,7 @@ public class MdpOublier extends Application {
         Parent root;
 
         try {
-            root = FXMLLoader.load(getClass().getResource("MdpOublier.fxml"));
+            root = FXMLLoader.load(getClass().getResource("menu.fxml"));
             Scene scene = new Scene(root, 600, 400);
             primaryStage.setTitle("Réinitialiser mot de passe");
             primaryStage.setScene(scene);

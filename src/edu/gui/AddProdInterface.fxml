@@ -124,5 +124,6 @@
             </TableView>
          </children>
       </AnchorPane>
+      <Button fx:id="btn_back" layoutX="961.0" layoutY="2.0" mnemonicParsing="false" onAction="#back" text="Back" />
    </children>
 </AnchorPane>

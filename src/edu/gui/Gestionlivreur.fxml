@@ -5,18 +5,25 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="TableLivreur" prefHeight="759.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.GestionlivreurController">
+<AnchorPane id="AnchorPane" fx:id="TableLivreur" prefHeight="1000.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.GestionlivreurController">
    <children>
+      <ImageView fitHeight="1200.0" fitWidth="1898.0">
+         <image>
+            <Image url="@photo/275293722_625022725242780_2881079790372210323_n.jpg" />
+         </image>
+      </ImageView>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text layoutX="200.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Livreur" wrappingWidth="321.21630859375">
          <font>
-            <Font name="Arial" size="35.0" />
+            <Font name="AppleMyungjo Regular" size="35.0" />
          </font>
       </Text>
       <TableView fx:id="tabLiv" layoutX="26.0" layoutY="162.0" prefHeight="354.0" prefWidth="702.0">
@@ -27,9 +34,18 @@
             <TableColumn fx:id="colTel" prefWidth="213.0" text="Tel" />
         </columns>
       </TableView>
-      <Button fx:id="btnADD" layoutX="26.0" layoutY="124.0" mnemonicParsing="false" onAction="#ADDLivreur" prefHeight="27.0" prefWidth="108.0" text="ADD" />
-      <Button fx:id="modifierbtn" layoutX="160.0" layoutY="124.0" mnemonicParsing="false" onAction="#modifierLivreur" prefHeight="27.0" prefWidth="127.0" text="Modifier" />
-      <Button fx:id="suppbtn" layoutX="306.0" layoutY="124.0" mnemonicParsing="false" onAction="#supprimerlivreur" prefHeight="27.0" prefWidth="94.0" text="supprimer" />
+      <Button fx:id="btnADD" layoutX="26.0" layoutY="120.0" mnemonicParsing="false" onAction="#ADDLivreur" prefHeight="27.0" prefWidth="108.0" text="ADD">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font></Button>
+      <Button fx:id="modifierbtn" layoutX="149.0" layoutY="120.0" mnemonicParsing="false" onAction="#modifierLivreur" prefHeight="27.0" prefWidth="127.0" text="Modifier">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font></Button>
+      <Button fx:id="suppbtn" layoutX="295.0" layoutY="120.0" mnemonicParsing="false" onAction="#supprimerlivreur" prefHeight="35.0" prefWidth="108.0" text="supprimer">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font></Button>
       <Pane fx:id="formpane" layoutX="24.0" layoutY="529.0" opacity="0.0" prefHeight="200.0" prefWidth="702.0">
          <children>
             <Button fx:id="savebtn" layoutX="509.0" layoutY="150.0" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="155.0" text="enregistrer" />
@@ -45,6 +61,10 @@
          </children>
       </Pane>
       <TextField fx:id="recherche" layoutX="412.0" layoutY="124.0" onKeyReleased="#chercher" prefHeight="27.0" prefWidth="274.0" />
-      <Button fx:id="gestionlivraison" layoutX="534.0" layoutY="45.0" mnemonicParsing="false" onAction="#navigate" prefHeight="27.0" prefWidth="192.0" text="gestion livraison" />
+      <Button fx:id="gestionlivraison" layoutX="534.0" layoutY="45.0" mnemonicParsing="false" onAction="#navigate" prefHeight="27.0" prefWidth="192.0" text="gestion livraison">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font></Button>
+      <Button fx:id="btn_back" layoutX="239.0" layoutY="775.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="244.0" text="Back" />
    </children>
 </AnchorPane>

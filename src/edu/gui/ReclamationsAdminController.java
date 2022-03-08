@@ -9,6 +9,7 @@ import edu.entities.Produit;
 import edu.entities.Reclamation;
 import edu.services.ProduitService;
 import edu.services.ReclamationService;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -16,8 +17,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -49,6 +54,8 @@ public class ReclamationsAdminController implements Initializable {
     private TableView<Reclamation> ReclamationView;
 
     Reclamation reclamation = null;
+    @FXML
+    private Button btn_back;
 
     /**
      * Initializes the controller class.
@@ -120,9 +127,15 @@ public class ReclamationsAdminController implements Initializable {
     }
 
     @FXML
-    private void Close(ActionEvent event) {
-         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    private void Close(ActionEvent event) throws IOException {
+      btn_back.getScene().getWindow().hide();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("AdminMenu.fxml"));
+                        loader.load();
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.show();
     }
 
 }

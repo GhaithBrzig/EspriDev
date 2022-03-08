@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="433.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.AfficherReservationController">
+   <children>
+      <ImageView fitHeight="433.0" fitWidth="675.0">
+         <image>
+            <Image url="@image/275293722_625022725242780_2881079790372210323_n.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="TableRes" layoutX="27.0" layoutY="96.0" prefHeight="239.0" prefWidth="590.0">
+        <columns>
+          <TableColumn fx:id="idRes" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="ResnomC" prefWidth="99.33334350585938" text="Nom de Client" />
+            <TableColumn fx:id="ResNum" prefWidth="99.33334350585938" text="Numero" />
+            <TableColumn fx:id="ResNbp" prefWidth="126.66668701171875" text="Nombre de personne" />
+            <TableColumn fx:id="ResDate" prefWidth="73.33331298828125" text="Date" />
+            <TableColumn fx:id="ResidEv" prefWidth="114.66668701171875" text="Id evenement" />
+        </columns>
+      </TableView>
+      <Pane layoutY="81.0" prefHeight="5.0" prefWidth="605.0" style="-fx-background-color: black;" />
+      <Text layoutX="4.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detail Reservation" wrappingWidth="293.4700746536255">
+         <font>
+            <Font name="Bauhaus 93" size="30.0" />
+         </font>
+      </Text>
+      <VBox layoutX="221.0" layoutY="357.0">
+         <children>
+            <HBox />
+         </children>
+      </VBox>
+      <Button fx:id="AZ" layoutX="375.0" layoutY="371.0" mnemonicParsing="false" onAction="#Ajouter2" prefHeight="25.0" prefWidth="77.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Ajouter" />
+      <Button fx:id="Refresh" layoutX="215.0" layoutY="371.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="85.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Refresh" />
+   </children>
+</AnchorPane>

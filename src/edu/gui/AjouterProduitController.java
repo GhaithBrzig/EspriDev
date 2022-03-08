@@ -18,9 +18,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,7 +86,7 @@ public class AjouterProduitController implements Initializable {
     @FXML
     private TableColumn<Produit, Double> ColPrix;
     @FXML
-     TableView<Produit> StockView;
+    TableView<Produit> StockView;
     @FXML
     private TableColumn<Produit, Double> ColPrixT;
     @FXML
@@ -93,7 +95,14 @@ public class AjouterProduitController implements Initializable {
     Produit produit = null;
     String query = null;
     ResultSet resultSet = null;
+    Connection con = null;
+     PreparedStatement ps;
+     ResultSet rs = null;
     StockCategory c = new StockCategory();
+    @FXML
+    private Button btn_back;
+    @FXML
+    private Button btn_cat;
 
     /**
      * Initializes the controller class.
@@ -133,32 +142,45 @@ public class AjouterProduitController implements Initializable {
 
     @FXML
     private void Btnajout(ActionEvent event) {
-        if (PName.getText().equals("") || PUnite.getText().equals("") || PQuantite.getText().equals("") || PPrixUnitaire.getText().equals("") || Categorie.getValue() == null) {
-
-            JOptionPane.showMessageDialog(null, "Champ manquant!", "Input error ", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                String nom = PName.getText();
-                int id_categorie;
-                id_categorie = Categorie.getValue().getId();
-                String unite = PUnite.getText();
-                int qte = Integer.parseInt(PQuantite.getText());
-                String categorie = Categorie.getValue().getNom();
-                Double prix_unitaire = Double.parseDouble(PPrixUnitaire.getText());
-
-                Produit p = new Produit(id_categorie, nom, unite, qte, categorie, prix_unitaire);
-
-                ProduitService psv = new ProduitService();
-                psv.addProduit(p);
-                StockView.getItems().clear();
-                initiateCols();
-                LoadData();
-            } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(null, "Prix et quantite doivent étre des nombres!", "Input error ", JOptionPane.ERROR_MESSAGE);
-                PQuantite.setText("");
-                PPrixUnitaire.setText("");
+        con = MyConnection.getInstance().getCnx();
+        try {
+          String sql = "SELECT * FROM stock where Nom LIKE '"+PName.getText()+"' ";
+          ps = con.prepareCall(sql);
+           boolean b = false; 
+              b = ps.execute();
+                   rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                 JOptionPane.showMessageDialog(null, "produit existe deja !", "Input error ", JOptionPane.ERROR_MESSAGE);
             }
-
+            else if (PName.getText().equals("") || PUnite.getText().equals("") || PQuantite.getText().equals("") || PPrixUnitaire.getText().equals("") || Categorie.getValue() == null) {
+                
+                JOptionPane.showMessageDialog(null, "Champ manquant!", "Input error ", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    String nom = PName.getText();
+                    int id_categorie;
+                    id_categorie = Categorie.getValue().getId();
+                    String unite = PUnite.getText();
+                    int qte = Integer.parseInt(PQuantite.getText());
+                    String categorie = Categorie.getValue().getNom();
+                    Double prix_unitaire = Double.parseDouble(PPrixUnitaire.getText());
+                    
+                    Produit p = new Produit(id_categorie, nom, unite, qte, categorie, prix_unitaire);
+                    
+                    ProduitService psv = new ProduitService();
+                    psv.addProduit(p);
+                    StockView.getItems().clear();
+                    initiateCols();
+                    LoadData();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Prix et quantite doivent étre des nombres!", "Input error ", JOptionPane.ERROR_MESSAGE);
+                    PQuantite.setText("");
+                    PPrixUnitaire.setText("");
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AjouterProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -191,9 +213,15 @@ public class AjouterProduitController implements Initializable {
     }
 
     @FXML
-    private void Close(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    private void Close(ActionEvent event) throws IOException {
+        btn_back.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AdminMenu.fxml"));
+        loader.load();
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     @FXML
@@ -235,9 +263,21 @@ public class AjouterProduitController implements Initializable {
             stage.initStyle(StageStyle.UTILITY);
             stage.showAndWait();
             StockView.getItems().clear();
-                initiateCols();
-                LoadData();
-            
+            initiateCols();
+            LoadData();
+
         }
+    }
+
+    @FXML
+    private void afficherCat(ActionEvent event) throws IOException {
+         btn_cat.getScene().getWindow().hide();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("InterfaceCategorie.fxml"));
+                        loader.load();
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.show();
     }
 }

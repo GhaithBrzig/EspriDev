@@ -2,39 +2,87 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.GestionLivraisonController">
+<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.GestionLivraisonController">
    <children>
-      <TableView fx:id="tabLivraison" layoutX="14.0" layoutY="14.0" prefHeight="311.0" prefWidth="400.0">
+      <ImageView fitHeight="1200.0" fitWidth="1898.0" layoutX="-98.0">
+         <image>
+            <Image url="@photo/275293722_625022725242780_2881079790372210323_n.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tabLivraison" layoutX="14.0" layoutY="14.0" prefHeight="311.0" prefWidth="741.0">
         <columns>
-          <TableColumn fx:id="idlivraison" prefWidth="67.0" text="Id livraison " />
-          <TableColumn fx:id="idLivreur" prefWidth="110.0" text="IdLivreur" />
-            <TableColumn fx:id="prixLiv" prefWidth="82.0" text="prix" />
-            <TableColumn fx:id="prixapresRemise" prefWidth="159.0" text="prix apres remise" />
+          <TableColumn fx:id="idlivraison" prefWidth="92.0" text="Id livraison " />
+          <TableColumn fx:id="idLivreur" prefWidth="143.99996948242188" text="IdLivreur" />
+            <TableColumn fx:id="prixLiv" prefWidth="163.0" text="Frais Livraison" />
+            <TableColumn fx:id="idcmd" prefWidth="163.0" text="ID COMMANDE" />
+            <TableColumn fx:id="totcmd" prefWidth="163.0" text="Total Commade" />
         </columns>
       </TableView>
-      <Button fx:id="add" layoutX="22.0" layoutY="336.0" mnemonicParsing="false" onAction="#addLiv" prefHeight="27.0" prefWidth="88.0" text="Ajouter" />
-      <Button fx:id="edit" layoutX="129.0" layoutY="336.0" mnemonicParsing="false" onAction="#editLiv" prefHeight="27.0" prefWidth="88.0" text="Modifier" />
-      <Button fx:id="delete" layoutX="243.0" layoutY="336.0" mnemonicParsing="false" onAction="#DeleteLiv" prefHeight="27.0" prefWidth="88.0" text="Supprimer" />
-      <Pane fx:id="formliv" layoutX="434.0" layoutY="25.0" prefHeight="350.0" prefWidth="420.0">
+      <Button fx:id="add" layoutX="22.0" layoutY="336.0" mnemonicParsing="false" onAction="#addLiv" prefHeight="27.0" prefWidth="88.0" text="Ajouter">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font></Button>
+      <Button fx:id="edit" layoutX="129.0" layoutY="336.0" mnemonicParsing="false" onAction="#editLiv" prefHeight="27.0" prefWidth="88.0" text="Modifier">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font></Button>
+      <Button fx:id="delete" layoutX="243.0" layoutY="336.0" mnemonicParsing="false" onAction="#DeleteLiv" prefHeight="35.0" prefWidth="99.0" text="Supprimer">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font></Button>
+      <Pane fx:id="formliv" layoutX="838.0" layoutY="25.0" prefHeight="350.0" prefWidth="420.0">
          <children>
+            <Label fx:id="erreur" layoutX="56.0" layoutY="263.0" prefHeight="68.0" prefWidth="150.0" textFill="RED" />
             <TextField fx:id="idinput" layoutX="237.0" layoutY="54.0" />
             <TextField fx:id="pricliv" layoutX="237.0" layoutY="162.0" />
-            <Label layoutX="160.0" layoutY="59.0" text="id" />
-            <Label layoutX="135.0" layoutY="112.0" text="nom livreur" />
-            <Label layoutX="170.0" layoutY="167.0" text="prix" />
-            <Button fx:id="save" layoutX="202.0" layoutY="215.0" mnemonicParsing="false" onAction="#savebutton" prefHeight="31.0" prefWidth="186.0" text="Enregistrer" />
-            <Label fx:id="erreur" layoutX="140.0" layoutY="263.0" prefHeight="68.0" prefWidth="193.0" textFill="RED" />
+            <Label layoutX="155.0" layoutY="54.0" text="id">
+               <font>
+                  <Font name="Charter Black Italic" size="22.0" />
+               </font></Label>
+            <Label layoutX="98.0" layoutY="110.0" text="nom livreur">
+               <font>
+                  <Font name="Charter Black" size="22.0" />
+               </font></Label>
+            <Label layoutX="143.0" layoutY="162.0" prefHeight="27.0" prefWidth="135.0" text="prix">
+               <font>
+                  <Font name="Charter Black" size="22.0" />
+               </font></Label>
+            <Button fx:id="save" layoutX="210.0" layoutY="297.0" mnemonicParsing="false" onAction="#savebutton" prefHeight="31.0" prefWidth="186.0" text="Enregistrer">
+               <font>
+                  <Font name="PT Serif" size="16.0" />
+               </font></Button>
             <ChoiceBox fx:id="idliv" layoutX="242.0" layoutY="107.0" prefWidth="150.0" />
+            <ComboBox fx:id="id_commande" layoutX="242.0" layoutY="231.0" prefWidth="150.0" />
+            <Label layoutX="62.0" layoutY="123.0" prefHeight="241.0" prefWidth="186.0" text="Commande ID">
+               <font>
+                  <Font name="Charter Black" size="22.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <Button fx:id="backbtn" layoutX="521.0" layoutY="510.0" mnemonicParsing="false" onAction="#backtogestionLiv" prefHeight="31.0" prefWidth="351.0" text="back" />
-      <Button fx:id="imprimerliv" layoutX="127.0" layoutY="398.0" mnemonicParsing="false" onAction="#printtliv" prefHeight="27.0" prefWidth="88.0" text="Imprimer" />
+      <Button fx:id="backbtn" layoutX="619.0" layoutY="517.0" mnemonicParsing="false" onAction="#backtogestionLiv" prefHeight="31.0" prefWidth="351.0" text="Gestion livreur">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font></Button>
+      <Button fx:id="imprimerliv" layoutX="127.0" layoutY="398.0" mnemonicParsing="false" onAction="#printtliv" prefHeight="35.0" prefWidth="99.0" text="Imprimer">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font></Button>
+      <Button fx:id="backbtn1" layoutX="195.0" layoutY="517.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="351.0" text="back">
+         <font>
+            <Font name="PT Serif" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

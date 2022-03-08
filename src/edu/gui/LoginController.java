@@ -93,7 +93,7 @@ public class LoginController implements Initializable {
                     JOptionPane.showMessageDialog(null, "Connexion etablie");
 
                     btn_login.getScene().getWindow().hide();
-                    Parent root = FXMLLoader.load(getClass().getResource("List.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("AdminMenu.fxml"));
                     Stage mainStage = new Stage();
                     Scene scene = new Scene(root);
                     mainStage.setScene(scene);
@@ -113,24 +113,35 @@ public class LoginController implements Initializable {
                 else {
                     
                     if (rs.next()) {
+//
+//                        JOptionPane.showMessageDialog(null, "Connexion etablie");
+//                        
+//
+//                        btn_login.getScene().getWindow().hide();
+//
+//                        FXMLLoader loader = new FXMLLoader();
+//                        loader.setLocation(getClass().getResource("ProfilU.fxml"));
+//                        loader.load();
+//                        ProfilUController updateProfil = loader.getController();
+//                        updateProfil.setUpdate(true);
+//                        updateProfil.setLabel(email.getText(), rs.getString("nom"), rs.getString("prenom"), rs.getString("dn"));
+//                        Parent parent = loader.getRoot();
+//                        Stage stage = new Stage();
+//                        stage.setScene(new Scene(parent));
+//                        stage.initStyle(StageStyle.UTILITY);
+//                        stage.show();
 
                         JOptionPane.showMessageDialog(null, "Connexion etablie");
                         
 
                         btn_login.getScene().getWindow().hide();
-
                         FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("ProfilU.fxml"));
+                        loader.setLocation(getClass().getResource("../../panier/Views/InterfaceMenu.fxml"));
                         loader.load();
-                        ProfilUController updateProfil = loader.getController();
-                        updateProfil.setUpdate(true);
-                        updateProfil.setLabel(email.getText(), rs.getString("nom"), rs.getString("prenom"), rs.getString("dn"));
                         Parent parent = loader.getRoot();
                         Stage stage = new Stage();
                         stage.setScene(new Scene(parent));
-                        stage.initStyle(StageStyle.UTILITY);
                         stage.show();
-
                     } else {
 
                         JOptionPane.showMessageDialog(null, "Connexion echouée");

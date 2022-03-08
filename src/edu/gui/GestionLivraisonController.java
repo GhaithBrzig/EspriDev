@@ -12,6 +12,7 @@ import edu.services.LivreurCRUD;
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -30,6 +31,7 @@ import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -39,13 +41,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javax.swing.JTable;
 import javafx.util.StringConverter;
-
-
-
-
 
 /**
  * FXML Controller class
@@ -53,7 +52,8 @@ import javafx.util.StringConverter;
  * @author islemferchichi
  */
 public class GestionLivraisonController implements Initializable {
-String action;
+
+    String action;
     @FXML
     private TableView<Object> tabLivraison;
     @FXML
@@ -82,108 +82,114 @@ String action;
     private Label erreur;
     @FXML
     private Button imprimerliv;
-     @FXML
+    @FXML
     private TableColumn<Livraison, Integer> idLivreur;
-      @FXML
-    private TableColumn<Livraison, Double> prixapresRemise;
 
     /**
      * Initializes the controller class.
      */
-    ObservableList<Livreur>Listdata = FXCollections.observableArrayList();
+    LivraisonCRUD ll = new LivraisonCRUD();
+    ObservableList<Livreur> Listdata = FXCollections.observableArrayList();
     ObservableList<Object> listdata = FXCollections.observableArrayList();
-   
-   
+    @FXML
+    private ComboBox<Integer> id_commande;
+    @FXML
+    private TableColumn<Livraison, Integer> idcmd;
+    @FXML
+    private TableColumn<Livraison, Double> totcmd;
+    @FXML
+    private Button backbtn1;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
-       formliv.setOpacity(0);
- LivraisonCRUD l = new LivraisonCRUD();
+    ObservableList<Integer> Listidcommande = FXCollections.observableArrayList(ll.DisplayCommandeId());
+
+        formliv.setOpacity(0);
+        LivraisonCRUD l = new LivraisonCRUD();
         for (Livreur lv : l.DisplayLivraison2()) {
             Listdata.add(lv);
         }
         idliv.setItems(Listdata);
         System.out.print(Listdata);
-
+        id_commande.setItems(Listidcommande);
         // pour tabiew naccepte ke les  observableliste
         
-         
-         
         idlivraison.setCellValueFactory(new PropertyValueFactory<>("IdLivraison"));
-       idLivreur.setCellValueFactory(new PropertyValueFactory<>("IdLivreur"));
+        idLivreur.setCellValueFactory(new PropertyValueFactory<>("IdLivreur"));
         prixLiv.setCellValueFactory(new PropertyValueFactory<>("FraisdeLivraison"));
+        idcmd.setCellValueFactory(new PropertyValueFactory<>("id_commande"));
+        totcmd.setCellValueFactory(new PropertyValueFactory<>("total"));
         LivraisonCRUD lc = new LivraisonCRUD();
-        listdata.addAll(lc.DisplayLivraison());
+        List<Livraison> lv = lc.DisplayLivraison();
+        listdata.addAll(lv);
+        System.out.print(listdata);
         tabLivraison.setItems(listdata);
         edit.setDisable(true);
-                delete.setDisable(true);
+        delete.setDisable(true);
         ObservableList selectedCells = tabLivraison.getSelectionModel().getSelectedCells();
         selectedCells.addListener(new ListChangeListener() {
             @Override
             public void onChanged(ListChangeListener.Change c) {
                 Livraison livselected = (Livraison) tabLivraison.getSelectionModel().getSelectedItem();
-                if(livselected!=null){
-                  edit.setDisable(false);
-                delete.setDisable(false);
+                if (livselected != null) {
+                    edit.setDisable(false);
+                    delete.setDisable(false);
+                } else {
+                    edit.setDisable(true);
+                    delete.setDisable(true);
                 }
-                else{
-            edit.setDisable(true);
-                delete.setDisable(true);
-               }
             }
-           
+
         });
     }
-    public void refreshLivraison(){
-      ObservableList<Object> listdata = FXCollections.observableArrayList();
-      idlivraison.setCellValueFactory(new PropertyValueFactory<>("IdLivraison"));
+
+    public void refreshLivraison() {
+        ObservableList<Object> listdata = FXCollections.observableArrayList();
+        idlivraison.setCellValueFactory(new PropertyValueFactory<>("IdLivraison"));
         idLivreur.setCellValueFactory(new PropertyValueFactory<>("IdLivreur"));
         prixLiv.setCellValueFactory(new PropertyValueFactory<>("FraisdeLivraison"));
+        idcmd.setCellValueFactory(new PropertyValueFactory<>("id_commande"));
+        totcmd.setCellValueFactory(new PropertyValueFactory<>("total"));
         LivraisonCRUD lc = new LivraisonCRUD();
-               listdata.addAll(lc.DisplayLivraison());
+        listdata.addAll(lc.DisplayLivraison());
         tabLivraison.setItems(listdata);
 
-    }    
+    }
 
-   @FXML
+    @FXML
     private void backtogestionLiv(ActionEvent event) {
-         try {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Gestionlivreur.fxml"));
             Parent root = loader.load();
             GestionlivreurController dpc = loader.getController();
 
             backbtn.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(GestionLivraisonController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.getMessage();
         }
     }
 
     @FXML
     private void addLiv(ActionEvent event) {
-         formliv.setOpacity(1);
-         action="add";
-         idinput.setText("");
-         pricliv.setText("");
-         //idliv.setText("");
-         
-        
+        formliv.setOpacity(1);
+        action = "add";
+        idinput.setText("");
+        pricliv.setText("");
+        //idliv.setText("");
+
     }
 
     @FXML
-    
+
     private void editLiv(ActionEvent event) {
-       Livraison livselected = (Livraison) tabLivraison.getSelectionModel().getSelectedItem();
+        Livraison livselected = (Livraison) tabLivraison.getSelectionModel().getSelectedItem();
         formliv.setOpacity(1);
-        action="Edit";
+        action = "Edit";
         idinput.setText(String.valueOf(livselected.getIdLivraison()));
         pricliv.setText(String.valueOf(livselected.getFraisdeLivraison()));
         idliv.setValue(idliv.getValue());
-
         idinput.setDisable(true);
-        
-        
+
     }
 
     @FXML
@@ -191,45 +197,45 @@ String action;
         Livraison livselected = (Livraison) tabLivraison.getSelectionModel().getSelectedItem();
         LivraisonCRUD lc = new LivraisonCRUD();
         lc.deleteLivraison(livselected.getIdLivraison());
-                refreshLivraison();
+        refreshLivraison();
 
     }
 
     @FXML
     private void savebutton(ActionEvent event) {
-        if(idinput.getText().compareTo("")==0||pricliv.getText().compareTo("")==0||idliv.getValue()==null){
-        erreur.setText("erreur");
+        if (idinput.getText().compareTo("") == 0 || pricliv.getText().compareTo("") == 0 || idliv.getValue() == null || id_commande.getValue()==null ) {
+            erreur.setText("erreur");
         } //si les inputs far8in affichi erreur
-        else{
-                    erreur.setText("");
+        else {
+            erreur.setText("");
 
-                                LivraisonCRUD lc = new LivraisonCRUD();
+            LivraisonCRUD lc = new LivraisonCRUD();
 
             //si l'action est ajouter 
-            if(action.compareTo("add")==0){
-            Livraison l =new Livraison(Integer.valueOf(idinput.getText()),Integer.valueOf(idliv.getValue().getIdLivreur()),Double.valueOf(pricliv.getText()));
-            lc.addLivraison(l);
-            }else{
+            if (action.compareTo("add") == 0) {
+                Livraison l = new Livraison(Integer.valueOf(idinput.getText()), Integer.valueOf(idliv.getValue().getIdLivreur()), Double.valueOf(pricliv.getText()),id_commande.getValue());
+                lc.addLivraison(l);
+            } else {
                 //si l'action est modification
-              Livraison livraisonselected = (Livraison) tabLivraison.getSelectionModel().getSelectedItem(); //livraison selected from tableview
-              livraisonselected.setFraisdeLivraison(Double.valueOf(pricliv.getText())); //modifier 
-              livraisonselected.setIdLivreur(Integer.valueOf(idliv.getValue().getIdLivreur())); //modifier
-             lc.updateLivraison(livraisonselected);
-             
+                Livraison livraisonselected = (Livraison) tabLivraison.getSelectionModel().getSelectedItem(); //livraison selected from tableview
+                livraisonselected.setFraisdeLivraison(Double.valueOf(pricliv.getText())); //modifier 
+                livraisonselected.setIdLivreur(Integer.valueOf(idliv.getValue().getIdLivreur())); //modifier
+              livraisonselected.setId_commande(Integer.valueOf(id_commande.getValue())); //modifier
+
+                lc.updateLivraison(livraisonselected);
+
             }
-                    refreshLivraison();
+            refreshLivraison();
+            idinput.setDisable(false);
+            idinput.clear();
 
         }
-        
+
     }
 
-  
- 
-    
-    
     @FXML
     private void printtliv(ActionEvent event) {
-         PrinterJob job = PrinterJob.createPrinterJob();
+        PrinterJob job = PrinterJob.createPrinterJob();
 
         Node root = this.tabLivraison;
 
@@ -240,15 +246,13 @@ String action;
             boolean success = job.printPage(pageLayout, root);
             if (success) {
                 job.endJob();
+            }
+
+            refreshLivraison();
+        }
     }
-       
-         refreshLivraison();
-        }}
 
-    
 
-    
-}
 /*{Scanner clavier=new Scanner(System.in);
         double HT=0,tva=0,r=0,netc=0,ttc=0;
         System.out.println("entrer N");
@@ -270,6 +274,30 @@ String action;
     System.out.println("net commercial est"+netc+"dinars");
     System.out.println("TVA est"+tva+"dinars");*/
 
-     //}}}}
-
+//}}}}
+/*
+public List<Livraison> Remise(List<Livraison> lv){
     
+ for(Livraison i : lv)   
+ {
+     if(i.getFraisdeLivraison() > 100)
+     {
+         i.setFraisdeLivraison(0);
+     }
+ }
+        return lv;
+}
+*/
+
+    @FXML
+    private void back(ActionEvent event) throws IOException {
+        backbtn1.getScene().getWindow().hide();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("AdminMenu.fxml"));
+                        loader.load();
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.show();
+    }
+}

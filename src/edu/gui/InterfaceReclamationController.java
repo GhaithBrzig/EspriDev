@@ -8,6 +8,7 @@ package edu.gui;
 import edu.entities.Reclamation;
 import edu.services.ReclamationService;
 import edu.utils.JavaMailUtil;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,7 +22,11 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javax.mail.event.MailEvent;
 import javax.mail.internet.AddressException;
@@ -40,6 +45,8 @@ public class InterfaceReclamationController implements Initializable {
     private TextField CEmail;
     @FXML
     private TextArea Description;
+    @FXML
+    private Button btn_back;
     
 
 
@@ -98,9 +105,15 @@ public class InterfaceReclamationController implements Initializable {
     }
 
     @FXML
-    private void annuler(ActionEvent event) {
-          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    private void annuler(ActionEvent event) throws IOException {
+       btn_back.getScene().getWindow().hide();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("../../panier/Views/InterfaceMenu.fxml"));
+                        loader.load();
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.show();
     }
 
 

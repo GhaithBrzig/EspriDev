@@ -28,7 +28,7 @@ import java.util.List;
     
     public void addLivreur(Livreur glv) {
         try {
-            String request = "INSERT INTO Livreur (IdLivreur,NomLivreur,prenomLivreur,telLivreur) VALUES(?,?,?,?) ";
+            String request = "INSERT INTO livreur (IdLivreur,NomLivreur,prenomLivreur,telLivreur) VALUES(?,?,?,?) ";
             PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
              
            pst.setInt(1,glv.getIdLivreur());
@@ -50,7 +50,7 @@ import java.util.List;
     }
     public void updateLivreur(Livreur glv) {
         try {
-            String request = "UPDATE Livreur Set NomLivreur = ?,prenomLivreur = ?,telLivreur =? where idLivreur = ?  ";
+            String request = "UPDATE livreur Set NomLivreur = ?,prenomLivreur = ?,telLivreur =? where idLivreur = ?  ";
             PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
      
            pst.setString(1,glv.getNomLivreur());
@@ -71,7 +71,7 @@ import java.util.List;
        }}
     public void deleteLivreur(int IdLivreur) {
          try {
-            String request = "DELETE FROM Livreur  where IdLivreur = ?  ";
+            String request = "DELETE FROM livreur  where IdLivreur = ?  ";
             PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
             pst.setInt(1, IdLivreur);
             
@@ -87,7 +87,7 @@ import java.util.List;
    public List<Livreur> DisplayLivreur() {
         List<Livreur> myList = new ArrayList();
         try {
-            String request = "Select * from Livreur";
+            String request = "Select * from livreur";
             Statement st = MyConnection.getInstance().getCnx().createStatement();
             ResultSet res = st.executeQuery(request);
 

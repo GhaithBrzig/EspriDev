@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="mainBox" prefHeight="380.0" prefWidth="284.0" style="-fx-background-color: c3c3c3c3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="panier.Views.InterfacePaiementController">
+   <children>
+      <VBox alignment="CENTER" layoutX="36.0" layoutY="83.0" prefHeight="60.0" prefWidth="213.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="172.0" text="Veuillez remplir ces champs !">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <HBox layoutX="36.0" layoutY="187.0" prefHeight="27.0" prefWidth="213.0" style="-fx-border-color: black;">
+         <children>
+            <PasswordField fx:id="premierChiffres" alignment="CENTER" prefHeight="25.0" prefWidth="132.0" promptText="**** **** **** ****" style="-fx-background-color: transparent;" />
+            <TextField fx:id="dernierChiffres" alignment="CENTER" prefHeight="25.0" prefWidth="78.0" promptText="4567" style="-fx-background-color: transparent;" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="35.0" layoutY="221.0" prefHeight="40.0" prefWidth="213.0">
+         <children>
+            <DatePicker fx:id="datexpCarte" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="106.0" style="-fx-border-color: black;" />
+            <PasswordField fx:id="codeCarte" style="-fx-border-color: black;" />
+         </children>
+      </HBox>
+      <Button fx:id="btnValider" disable="true" layoutX="35.0" layoutY="313.0" mnemonicParsing="false" onAction="#validerCommande" prefHeight="25.0" prefWidth="213.0" text="Payer!" />
+   </children>
+</AnchorPane>

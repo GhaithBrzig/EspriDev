@@ -11,7 +11,9 @@ import edu.services.StockCategoryService;
 import edu.utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,6 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -51,6 +54,13 @@ public class InterfaceCategorieController implements Initializable {
     private TableView<StockCategory> CategoryView;
     
      StockCategory categorie = null;
+    @FXML
+    private Button btn_back;
+    @FXML
+    private Button btn_stock;
+     Connection con = null;
+     PreparedStatement ps;
+     ResultSet rs = null;
 
     /**
      * Initializes the controller class.
@@ -78,24 +88,37 @@ public class InterfaceCategorieController implements Initializable {
 
     @FXML
     private void Save(ActionEvent event) {
-        if (CName.getText().equals("")) {
-
-            JOptionPane.showMessageDialog(null, "Inserer un nom !", "Input error ", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                String nom = CName.getText();
-
-                StockCategory c = new StockCategory(nom);
-
-                StockCategoryService csv = new StockCategoryService();
-                csv.addStockCategory(c);
-                CategoryView.getItems().clear();
-                initiateCols();
-                LoadData();
-            } catch (RuntimeException e) {
-                Logger.getLogger(InterfaceCategorieController.class.getName()).log(Level.SEVERE, null, e);
+        con = MyConnection.getInstance().getCnx();
+        try {
+            String sql = "SELECT * FROM stockcategory WHERE nom LIKE '"+CName.getText()+"' ";
+            ps = con.prepareCall(sql);
+            boolean b = false;
+            b = ps.execute();
+            rs = ps.executeQuery(sql);
+              if (rs.next()) {
+                 JOptionPane.showMessageDialog(null, "categorie existe deja !", "Input error ", JOptionPane.ERROR_MESSAGE);
             }
-
+              else if (CName.getText().equals("")) {
+                
+                JOptionPane.showMessageDialog(null, "Inserer un nom !", "Input error ", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    String nom = CName.getText();
+                    
+                    StockCategory c = new StockCategory(nom);
+                    
+                    StockCategoryService csv = new StockCategoryService();
+                    csv.addStockCategory(c);
+                    CategoryView.getItems().clear();
+                    initiateCols();
+                    LoadData();
+                } catch (RuntimeException e) {
+                    Logger.getLogger(InterfaceCategorieController.class.getName()).log(Level.SEVERE, null, e);
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfaceCategorieController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -148,9 +171,27 @@ public class InterfaceCategorieController implements Initializable {
     }
 
     @FXML
-    private void Close(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    private void Close(ActionEvent event) throws IOException {
+        btn_back.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AdminMenu.fxml"));
+        loader.load();
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
+    }
+
+    @FXML
+    private void afficher_stock(ActionEvent event) throws IOException {
+         btn_stock.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AjouterProduit.fxml"));
+        loader.load();
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
 }

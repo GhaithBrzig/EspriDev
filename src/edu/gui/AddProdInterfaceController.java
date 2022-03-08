@@ -47,6 +47,8 @@ import javax.swing.JOptionPane;
 import edu.services.GestionRemise;
 import edu.services.ProduitCRUD;
 import edu.utils.JavaMailUtil;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 /**
  * FXML Controller class
@@ -92,6 +94,8 @@ public class AddProdInterfaceController implements Initializable {
     private TableColumn<ProduitM, String> prom_col;
     @FXML
     private TableColumn<ProduitM, String> cate_col;
+    @FXML
+    private Button btn_back;
 
     /**
      * Initializes the controller class.
@@ -417,4 +421,16 @@ public class AddProdInterfaceController implements Initializable {
        l = Gr.getListB();
        Table_V.getItems().setAll(l);
    }
+
+    @FXML
+    private void back(ActionEvent event) throws IOException {
+          btn_back.getScene().getWindow().hide();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("AdminMenu.fxml"));
+                        loader.load();
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.show();
+    }
 }

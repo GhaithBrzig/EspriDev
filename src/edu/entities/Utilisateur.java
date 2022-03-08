@@ -47,6 +47,11 @@ public class Utilisateur {
         this.role = role;
     }
 
+    public Utilisateur(String nom) {
+        this.nom = nom;
+    }
+    
+
     public Utilisateur(int id_util, String nom, String prenom, String numtel, Date dn, String email, String mdp, int age, String role) {
         this.id_util = id_util;
         this.nom = nom;

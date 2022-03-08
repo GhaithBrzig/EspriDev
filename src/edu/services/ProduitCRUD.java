@@ -148,6 +148,33 @@ public class ProduitCRUD {
         }
         return myList;
     }
-    
-    
+    private static final String REQUETTE_SELECT_BYID = "select * from produit where id_prod=?";
+    public ProduitM produitLoadData(int id) {
+        ProduitM c = new ProduitM();
+        try {
+            PreparedStatement pst = new MyConnection().getCnx().prepareStatement(REQUETTE_SELECT_BYID);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                c.setId_prod(rs.getInt("id_prod"));
+                
+                c.setPrix_prod(rs.getDouble("prix_prod"));
+                c.setQuaniteDispo(rs.getInt("quantiteDispo"));
+                c.setLib_prod(rs.getString("lib_prod"));
+                c.setDescription(rs.getString("description"));
+                c.setPath(rs.getString("Image_prod"));
+                
+                return c;
+            }
+            pst.close();
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            System.out.println("Erreur");
+        }
+        return c;
+    }
 }
+    
+    
+

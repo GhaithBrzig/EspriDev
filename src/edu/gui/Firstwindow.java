@@ -21,7 +21,7 @@ public class Firstwindow extends Application {
     public void start(Stage primaryStage) {
         Parent root= null;
         try {
-            root = FXMLLoader.load(getClass().getResource("MainInter.FXML"));
+            root = FXMLLoader.load(getClass().getResource("Panier2.FXML"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Gestionlivreur!");
             primaryStage.setScene(scene);

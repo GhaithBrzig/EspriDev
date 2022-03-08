@@ -78,6 +78,8 @@ public class GestionlivreurController implements Initializable {
     private TextField recherche;
     @FXML
     private Button gestionlivraison;
+    @FXML
+    private Button btn_back;
 
     /**
      * Initializes the controller class.
@@ -212,6 +214,18 @@ tellinput.setText(String.valueOf(livselected.getTelLivreur()));
         } catch (IOException ex) {
             Logger.getLogger(GestionlivreurController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void back(ActionEvent event) throws IOException {
+        btn_back.getScene().getWindow().hide();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("AdminMenu.fxml"));
+                        loader.load();
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.show();
     }
 }
 
