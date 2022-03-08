@@ -13,9 +13,9 @@
    <content>
       <AnchorPane prefHeight="594.0" prefWidth="589.0">
          <children>
-            <ImageView fitHeight="599.0" fitWidth="600.0">
+            <ImageView fitHeight="392.0" fitWidth="587.0">
                <image>
-                  <Image url="@Photos/Ph2.png" />
+                  <Image url="@image/275293722_625022725242780_2881079790372210323_n.jpg" />
                </image>
             </ImageView>
             <Pane layoutX="32.0" layoutY="28.0" prefHeight="79.0" prefWidth="662.0" style="-fx-background-color: #fafafa;">

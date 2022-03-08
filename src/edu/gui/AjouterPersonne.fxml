@@ -13,21 +13,26 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.AjouterPersonneController">
    <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@image/275293722_625022725242780_2881079790372210323_n.jpg" />
+         </image>
+      </ImageView>
       <TextField fx:id="nom" layoutX="300.0" layoutY="102.0" promptText="Nom" />
       <TextField fx:id="prenom" layoutX="300.0" layoutY="144.0" promptText="Prénom" />
       <TextField fx:id="numtel" layoutX="300.0" layoutY="189.0" promptText="Numéro de téléphone" />
       <DatePicker fx:id="dn" layoutX="300.0" layoutY="227.0" promptText="Date of birth" />
       <TextField fx:id="email" layoutX="300.0" layoutY="268.0" promptText="Email" />
-      <Button fx:id="btn_ajouter" layoutX="233.0" layoutY="350.0" mnemonicParsing="false" onAction="#savePerson" prefHeight="25.0" prefWidth="134.0" stylesheets="@Nouveau%20document%20texte.css" text="Ajouter" />
+      <Button fx:id="btn_ajouter" layoutX="233.0" layoutY="350.0" mnemonicParsing="false" onAction="#savePerson" prefHeight="25.0" prefWidth="134.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" stylesheets="@Nouveau%20document%20texte.css" text="Ajouter" />
       <PasswordField fx:id="pwd" layoutX="300.0" layoutY="306.0" promptText="Mot de passe" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="76.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@sign%20up.png" />
          </image>
       </ImageView>
-      <Label layoutX="210.0" layoutY="14.0" prefHeight="32.0" prefWidth="181.0" text="Ajouter Employer">
+      <Label layoutX="162.0" layoutY="14.0" prefHeight="32.0" prefWidth="229.0" text="Ajouter Employer">
          <font>
-            <Font size="22.0" />
+            <Font name="Bauhaus 93" size="24.0" />
          </font>
       </Label>
       <ComboBox fx:id="combo_role" layoutX="301.0" layoutY="71.0" prefHeight="25.0" prefWidth="89.0" promptText="Role" />
