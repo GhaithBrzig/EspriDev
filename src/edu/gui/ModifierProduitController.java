@@ -9,8 +9,13 @@ import edu.entities.Produit;
 import edu.entities.StockCategory;
 import edu.services.ProduitService;
 import edu.services.StockCategoryService;
+import edu.utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +56,9 @@ public class ModifierProduitController implements Initializable {
     ChoiceBox<StockCategory> Categorie;
     int produitId;
     URL url;
+    Connection con = null;
+     PreparedStatement ps;
+     ResultSet rs = null;
 
     /**
      * Initializes the controller class.
@@ -90,47 +98,89 @@ public class ModifierProduitController implements Initializable {
 
     @FXML
     private void Enregistrer(ActionEvent event) {
-        if (PName.getText().equals("") || PUnite.getText().equals("") || PQuantite.getText().equals("") || PPrixUnitaire.getText().equals("") || Categorie.getValue() == null) {
-
-            JOptionPane.showMessageDialog(null, "Champ manquant!", "Input error ", JOptionPane.ERROR_MESSAGE);
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.url);
-            try {
-                loader.load();
-            } catch (IOException ex) {
-                Logger.getLogger(AjouterProduitController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            Parent parent = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(parent));
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.show();
-            stage.close();
-        } else {
-            try {
-                String nom = PName.getText();
-                int id_categorie;
-                id_categorie = Categorie.getValue().getId();
-                String unite = PUnite.getText();
-                int qte = Integer.parseInt(PQuantite.getText());
-                String categorie = Categorie.getValue().getNom();
-                Double prix_unitaire = Double.parseDouble(PPrixUnitaire.getText());
-
-                Produit p = new Produit(produitId, id_categorie, nom, unite, qte, categorie, prix_unitaire);
-
-                ProduitService psv = new ProduitService();
-                psv.updateProduit(p);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try {
+            con = MyConnection.getInstance().getCnx();
+            
+            String sql = "SELECT * FROM stock where Nom LIKE '"+PName.getText()+"' ";
+            ps = con.prepareCall(sql);
+            boolean b = false;
+            b = ps.execute();
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "produit existe deja !", "Input error ", JOptionPane.ERROR_MESSAGE);
+                 FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(this.url);
+                try {
+                    loader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(AjouterProduitController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                Parent parent = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(parent));
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.show();
                 stage.close();
-                JOptionPane.showMessageDialog(null, "produit modifié", "Modifié ", JOptionPane.INFORMATION_MESSAGE);
-
-            } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(null, "Prix et quantite doivent étre des nombres!", "Input error ", JOptionPane.ERROR_MESSAGE);
-                PQuantite.setText("");
-                PPrixUnitaire.setText("");
             }
-
+            else  if (PName.getText().equals("") || PUnite.getText().equals("") || PQuantite.getText().equals("") || PPrixUnitaire.getText().equals("") || Categorie.getValue() == null) {
+                
+                JOptionPane.showMessageDialog(null, "Champ manquant!", "Input error ", JOptionPane.ERROR_MESSAGE);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(this.url);
+                try {
+                    loader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(AjouterProduitController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                Parent parent = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(parent));
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.show();
+                stage.close();
+            } else {
+                try {
+                    String nom = PName.getText();
+                    int id_categorie;
+                    id_categorie = Categorie.getValue().getId();
+                    String unite = PUnite.getText();
+                    int qte = Integer.parseInt(PQuantite.getText());
+                    String categorie = Categorie.getValue().getNom();
+                    Double prix_unitaire = Double.parseDouble(PPrixUnitaire.getText());
+                    
+                    Produit p = new Produit(produitId, id_categorie, nom, unite, qte, categorie, prix_unitaire);
+                    
+                    ProduitService psv = new ProduitService();
+                    psv.updateProduit(p);
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    JOptionPane.showMessageDialog(null, "produit modifié", "Modifié ", JOptionPane.INFORMATION_MESSAGE);
+                    
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Prix et quantite doivent étre des nombres!", "Input error ", JOptionPane.ERROR_MESSAGE);
+                    PQuantite.setText("");
+                    PPrixUnitaire.setText("");
+                      FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(this.url);
+                try {
+                    loader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(AjouterProduitController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                Parent parent = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(parent));
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.show();
+                stage.close();
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ModifierProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

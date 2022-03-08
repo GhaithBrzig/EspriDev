@@ -6,17 +6,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.AdminMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gui.AdminMenuController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0">
+      <ImageView fitHeight="534.0" fitWidth="813.0">
          <image>
             <Image url="@image/275293722_625022725242780_2881079790372210323_n.jpg" />
          </image>
       </ImageView>
-      <GridPane layoutX="8.0" prefHeight="264.0" prefWidth="584.0">
+      <GridPane layoutX="8.0" prefHeight="264.0" prefWidth="584.0" AnchorPane.bottomAnchor="240.0" AnchorPane.rightAnchor="133.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,29 +27,43 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btn_addProd" mnemonicParsing="false" onAction="#goToAddProd" prefHeight="106.0" prefWidth="273.0" text="AjouterProduit">
+            <Button fx:id="btn_addProd" mnemonicParsing="false" onAction="#goToAddProd" prefHeight="106.0" prefWidth="273.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="AjouterProduit">
                <font>
                   <Font name="Georgia Bold Italic" size="28.0" />
                </font>
             </Button>
-            <Button fx:id="btn_stock" mnemonicParsing="false" onAction="#goToStock" prefHeight="106.0" prefWidth="283.0" text="Stock" GridPane.columnIndex="1">
+            <Button fx:id="btn_stock" mnemonicParsing="false" onAction="#goToStock" prefHeight="106.0" prefWidth="283.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Stock" GridPane.columnIndex="1">
                <font>
                   <Font name="Georgia Bold Italic" size="28.0" />
                </font>
             </Button>
-            <Button fx:id="btn_livraison" mnemonicParsing="false" onAction="#goToLivraison" prefHeight="106.0" prefWidth="273.0" text="Livraison" GridPane.rowIndex="1">
+            <Button fx:id="btn_livraison" mnemonicParsing="false" onAction="#goToLivraison" prefHeight="106.0" prefWidth="273.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Livraison" GridPane.rowIndex="1">
                <font>
                   <Font name="Georgia Bold Italic" size="28.0" />
                </font>
             </Button>
-            <Button fx:id="btn_reclamation" mnemonicParsing="false" onAction="#goToReclamation" prefHeight="106.0" prefWidth="284.0" text="Reclamations" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="btn_reclamation" mnemonicParsing="false" onAction="#goToReclamation" prefHeight="106.0" prefWidth="284.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Reclamations" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Georgia Bold Italic" size="28.0" />
                </font>
             </Button>
          </children>
       </GridPane>
-      <Button fx:id="btn_reservation" layoutX="8.0" layoutY="270.0" mnemonicParsing="false" onAction="#goToReservation" prefHeight="106.0" prefWidth="577.0" text="Reservations">
+      <HBox layoutX="97.0" layoutY="307.0">
+         <children>
+            <Button fx:id="btn_reservation" mnemonicParsing="false" onAction="#goToReservation" prefHeight="106.0" prefWidth="273.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Reservations">
+               <font>
+                  <Font name="Georgia Bold Italic" size="28.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Button fx:id="btn_user" layoutX="388.0" layoutY="307.0" mnemonicParsing="false" onAction="#goToUser" prefHeight="106.0" prefWidth="284.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Utilisateurs" AnchorPane.rightAnchor="141.0">
+         <font>
+            <Font name="Georgia Bold Italic" size="28.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_deconnecter" layoutX="233.0" layoutY="422.0" mnemonicParsing="false" onAction="#deconnecter" prefHeight="106.0" prefWidth="284.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Deconnecter" textFill="#8a1d1d">
          <font>
             <Font name="Georgia Bold Italic" size="28.0" />
          </font>

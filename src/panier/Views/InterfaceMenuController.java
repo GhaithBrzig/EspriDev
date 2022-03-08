@@ -137,6 +137,8 @@ public class InterfaceMenuController implements Initializable {
     private Button btnValiderCommande;
     @FXML
     private Button btn_reclamation;
+    @FXML
+    private Button btn_profil;
 
     private List<Commande> getDataCommande(Utilisateur u) {
         CommandeService cs = new CommandeService();
@@ -249,8 +251,8 @@ public class InterfaceMenuController implements Initializable {
             default:
                 bgcolor = "5F060E";
         }
-//        Image image = new Image(getClass().getResourceAsStream("../Images/" + p.getPath()));
-//        ImageProduit.setImage(image);
+//       Image image = new Image(getClass().getResourceAsStream("../Images/" + p.getPath()));
+//       ImageProduit.setImage(image);
         PrixProduit.setText(Double.toString(p.getPrix_prod()));
         NomProduit.setText(p.getLib_prod());
         anchorElement.setStyle("-fx-background-color: #" + bgcolor + ";\n"
@@ -643,6 +645,18 @@ public class InterfaceMenuController implements Initializable {
         btn_reclamation.getScene().getWindow().hide();
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(getClass().getResource("../../edu/gui/InterfaceReclamation.fxml"));
+                        loader.load();
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.show();
+    }
+
+    @FXML
+    private void profil(ActionEvent event) throws IOException {
+          btn_profil.getScene().getWindow().hide();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("../../edu/gui/ProfilU.fxml"));
                         loader.load();
                         Parent parent = loader.getRoot();
                         Stage stage = new Stage();

@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -34,6 +35,10 @@ public class AdminMenuController implements Initializable {
     private Button btn_reservation;
     @FXML
     private Button btn_reclamation;
+    @FXML
+    private Button btn_user;
+    @FXML
+    private Button btn_deconnecter;
 
 
 
@@ -95,7 +100,7 @@ public class AdminMenuController implements Initializable {
 
     @FXML
     private void goToReclamation(ActionEvent event) throws IOException {
-         btn_reservation.getScene().getWindow().hide();
+         btn_reclamation.getScene().getWindow().hide();
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(getClass().getResource("ReclamationsAdmin.fxml"));
                         loader.load();
@@ -103,6 +108,31 @@ public class AdminMenuController implements Initializable {
                         Stage stage = new Stage();
                         stage.setScene(new Scene(parent));
                         stage.show();
+    }
+
+    @FXML
+    private void goToUser(ActionEvent event) throws IOException {
+         btn_user.getScene().getWindow().hide();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("List.fxml"));
+                        loader.load();
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.show();
+    }
+
+    @FXML
+    private void deconnecter(ActionEvent event) throws IOException {
+         int opt = JOptionPane.showConfirmDialog(null, "Vous êtes sur?", "Supprimer", JOptionPane.YES_NO_OPTION);
+    if(opt==0){
+        btn_deconnecter.getScene().getWindow().hide();
+                 Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+                 Stage mainStage = new Stage();
+                 Scene scene = new Scene(root);
+                 mainStage.setScene(scene);
+                 mainStage.show();
+    }
     }
     
 }

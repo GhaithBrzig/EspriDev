@@ -64,8 +64,8 @@ public class UnePanierInterfaceController {
         prixPord.setText(Double.toString(produit.getPrix_prod()) + " DT");
         quantiteField.setText("" + Integer.toString(pan.getQuantite()));
         totalLabel.setText("" + produit.getPrix_prod()* pan.getQuantite() + " DT");
-//        Image image = new Image(getClass().getResourceAsStream("../Images/" + produit.getPath()));
-//        imgProd.setImage(image);
+//      Image image = new Image(getClass().getResourceAsStream("../Images/" + produit.getPath()));
+//       imgProd.setImage(image);
     }
 
     @FXML

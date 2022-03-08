@@ -26,6 +26,7 @@ public class LivraisonCRUD {
     //Connection cnx2;
    
     //cnx2 = MyConnection.getInstance().getCnx();
+     
     
     public void addLivraison(Livraison l) {
         

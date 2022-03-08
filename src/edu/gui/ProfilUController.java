@@ -5,6 +5,7 @@
  */
 package edu.gui;
 
+import edu.gui.UpdateProfillUController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,6 +42,8 @@ public class ProfilUController implements Initializable {
     private boolean update;
     @FXML
     private Button btn_deconn;
+    @FXML
+    private Button btn_back;
 
     /**
      * Initializes the controller class.
@@ -96,11 +99,17 @@ public class ProfilUController implements Initializable {
                  mainStage.setScene(scene);
                  mainStage.show();
     }}
-    
-     
-     
 
-    
+    @FXML
+    private void back(ActionEvent event) throws IOException {
+        btn_back.getScene().getWindow().hide();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("../../panier/Views/InterfaceMenu.fxml"));
+                        loader.load();
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.show();
     }
     
-
+}

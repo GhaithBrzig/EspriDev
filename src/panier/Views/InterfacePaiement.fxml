@@ -5,13 +5,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainBox" prefHeight="380.0" prefWidth="284.0" style="-fx-background-color: c3c3c3c3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="panier.Views.InterfacePaiementController">
+<AnchorPane id="AnchorPane" fx:id="mainBox" prefHeight="380.0" prefWidth="284.0" style="-fx-background-color: c3c3c3c3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="panier.Views.InterfacePaiementController">
    <children>
+      <ImageView fitHeight="380.0" fitWidth="284.0">
+         <image>
+            <Image url="@../../edu/gui/image/275293722_625022725242780_2881079790372210323_n.jpg" />
+         </image>
+      </ImageView>
       <VBox alignment="CENTER" layoutX="36.0" layoutY="83.0" prefHeight="60.0" prefWidth="213.0">
          <children>
             <Label prefHeight="17.0" prefWidth="172.0" text="Veuillez remplir ces champs !">
@@ -33,6 +40,6 @@
             <PasswordField fx:id="codeCarte" style="-fx-border-color: black;" />
          </children>
       </HBox>
-      <Button fx:id="btnValider" disable="true" layoutX="35.0" layoutY="313.0" mnemonicParsing="false" onAction="#validerCommande" prefHeight="25.0" prefWidth="213.0" text="Payer!" />
+      <Button fx:id="btnValider" disable="true" layoutX="35.0" layoutY="313.0" mnemonicParsing="false" onAction="#validerCommande" prefHeight="25.0" prefWidth="213.0" style="-fx-background-color: red;" text="Payer!" />
    </children>
 </AnchorPane>

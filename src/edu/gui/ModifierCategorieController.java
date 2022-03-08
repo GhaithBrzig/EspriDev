@@ -8,8 +8,13 @@ package edu.gui;
 
 import edu.entities.StockCategory;
 import edu.services.StockCategoryService;
+import edu.utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +42,9 @@ public class ModifierCategorieController implements Initializable {
 
         int categorieId;
 URL url;
+Connection con = null;
+     PreparedStatement ps;
+     ResultSet rs = null;
     /**
      * Initializes the controller class.
      */
@@ -54,43 +62,73 @@ void setTextField(int id, String name) {
     }
     @FXML
     private void Enregistrer(ActionEvent event) {
-         if (CName.getText().equals("")) {
-
-            JOptionPane.showMessageDialog(null, "Inserer un nom !", "Input error ", JOptionPane.ERROR_MESSAGE);
-             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.url);
-            try {
-                loader.load();
-            } catch (IOException ex) {
-                Logger.getLogger(ModifierCategorieController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-          
-
-            Parent parent = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(parent));
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.show();
-            stage.close();
-        } else {
-            try {
-                String nom = CName.getText();
+        try {
+            con = MyConnection.getInstance().getCnx();
+            
+            String sql = "SELECT * FROM stockcategory WHERE nom LIKE '"+CName.getText()+"' ";
+            ps = con.prepareCall(sql);
+            boolean b = false;
+            b = ps.execute();
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "categorie existe deja !", "Input error ", JOptionPane.ERROR_MESSAGE);
+                 FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(this.url);
+                 try {
+                    loader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(ModifierCategorieController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
-
-                StockCategory c = new StockCategory(categorieId, nom);
-
-                  StockCategoryService csv = new StockCategoryService();
-                csv.updateStockCategory(c);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                
+                
+                Parent parent = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(parent));
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.show();
                 stage.close();
-                JOptionPane.showMessageDialog(null, "categorie modifié", "Modifié ", JOptionPane.INFORMATION_MESSAGE);
-                
-
-            } catch (RuntimeException e) {
-               Logger.getLogger(ModifierCategorieController.class.getName()).log(Level.SEVERE, null, e);
             }
-
+            else if (CName.getText().equals("")) {
+                
+                JOptionPane.showMessageDialog(null, "Inserer un nom !", "Input error ", JOptionPane.ERROR_MESSAGE);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(this.url);
+                try {
+                    loader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(ModifierCategorieController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                
+                Parent parent = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(parent));
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.show();
+                stage.close();
+            } else {
+                try {
+                    String nom = CName.getText();
+                    
+                    
+                    StockCategory c = new StockCategory(categorieId, nom);
+                    
+                    StockCategoryService csv = new StockCategoryService();
+                    csv.updateStockCategory(c);
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    JOptionPane.showMessageDialog(null, "categorie modifié", "Modifié ", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    
+                } catch (RuntimeException e) {
+                    Logger.getLogger(ModifierCategorieController.class.getName()).log(Level.SEVERE, null, e);
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ModifierCategorieController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

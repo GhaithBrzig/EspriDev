@@ -5,6 +5,9 @@
  */
 package panier.Services;
 
+import com.github.plushaze.traynotification.notification.Notification;
+import com.github.plushaze.traynotification.notification.Notifications;
+import com.github.plushaze.traynotification.notification.TrayNotification;
 import panier.Entity.Panier;
 import panier.Entity.Produit;
 import panier.Entity.Utilisateur;
@@ -14,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.util.Duration;
 
 /**
  *
@@ -42,6 +46,7 @@ public class PanierService {
             pst.executeUpdate();
             System.out.println("Produit Ajouté au panier! ");
             return true;
+              
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
             System.out.println("Erreur Produit deja dans panier ");
@@ -52,8 +57,8 @@ public class PanierService {
              System.out.println("Quantite inssufisante");
              return false;
          }
-   
-        }
+    }
+     
      
      public boolean supprimerPanier(int id ){
         

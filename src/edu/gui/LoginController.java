@@ -6,6 +6,7 @@
 package edu.gui;
 
 import edu.entities.Utilisateur;
+import edu.gui.ListController;
 import edu.utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
@@ -53,9 +54,8 @@ public class LoginController implements Initializable {
     PreparedStatement ps;
     Connection con = null;
     ResultSet rs = null;
-    int i = 0 ; 
+    int i = 0;
     int j = 2500;
-
 
     /**
      * Initializes the controller class.
@@ -64,29 +64,151 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-     public Button getButton() {
-            return this.btn_inscrire;
-}
-    @FXML
-    private void login(ActionEvent event) {
-        con = MyConnection.getInstance().getCnx();
-            this.i = this.i +1 ;
 
+    public Button getButton() {
+        return this.btn_inscrire;
+    }
+
+//    @FXML
+//    private void login(ActionEvent event) {
+//        con = MyConnection.getInstance().getCnx();
+//        this.i = this.i + 1;
+//
+//        try {
+//            String sql = "SELECT * FROM log where email like ? AND mdp like ? ";
+//            ps = con.prepareCall(sql);
+//            Utilisateur p = new Utilisateur();
+//            ps.setString(1, email.getText());
+//            ps.setString(2, pwd.getText());
+//            rs = ps.executeQuery();
+//            if (rs.next()) {
+//
+//                String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+//                Pattern pattern = Pattern.compile(regex);
+//
+//                if (email.getText().isEmpty() || pwd.getText().isEmpty() || !email.getText().matches(regex) || pwd.getText().length() < 8) {
+//
+//                    JOptionPane.showMessageDialog(null, "Veuillez vérifier vos données");
+//
+//                } else {
+//                    if (email.getText().equals("admin@admin.com") && pwd.getText().equals("adminadmin")) {
+//                        JOptionPane.showMessageDialog(null, "Connexion etablie");
+//
+//                        btn_login.getScene().getWindow().hide();
+//                        Parent root = FXMLLoader.load(getClass().getResource("List.fxml"));
+//                        Stage mainStage = new Stage();
+//                        Scene scene = new Scene(root);
+//                        mainStage.setScene(scene);
+//                        mainStage.show();
+//                    } else if (email.getText().equals("personnel@personnel.com") && pwd.getText().equals("personnel123")) {
+//                        JOptionPane.showMessageDialog(null, "Connexion etablie");
+//
+//                        btn_login.getScene().getWindow().hide();
+//                        Parent root = FXMLLoader.load(getClass().getResource("ListPersonnel.fxml"));
+//                        Stage mainStage = new Stage();
+//                        Scene scene = new Scene(root);
+//                        mainStage.setScene(scene);
+//                        mainStage.show();
+//
+//                    } else {
+//                        if (rs.first()) {
+//
+//                            JOptionPane.showMessageDialog(null, "Connexion etablie");
+//
+//                            btn_login.getScene().getWindow().hide();
+//
+//                            FXMLLoader loader = new FXMLLoader();
+//                            loader.setLocation(getClass().getResource("ProfilU.fxml"));
+//                            loader.load();
+//                            ProfilUController updateProfil = loader.getController();
+//                            updateProfil.setUpdate(true);
+//                            updateProfil.setLabel(email.getText(), rs.getString("nom"), rs.getString("prenom"), rs.getString("dn"));
+//                            Parent parent = loader.getRoot();
+//                            Stage stage = new Stage();
+//                            stage.setScene(new Scene(parent));
+//                            stage.initStyle(StageStyle.UTILITY);
+//                            stage.show();
+//
+//                        } else {
+//
+//                            JOptionPane.showMessageDialog(null, "Connexion echouée");
+//                            if ((this.i) % 3 == 0) {
+//                                this.j = this.j * 2;
+//
+//                                btn_login.setDisable(true);
+//                                Timer timer = new Timer();
+//                                timer.schedule(new TimerTask() {
+//                                    @Override
+//                                    public void run() {
+//                                        Platform.runLater(() -> {
+//                                            btn_login.setDisable(false);
+//                                        });
+//                                    }
+//                                }, j);
+//
+//                            }
+//
+//                        }
+//
+//                    }
+//                }
+//
+//                }else {
+//                btn_login.setDisable(true);
+//                Timer timer = new Timer();
+//                timer.schedule(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        Platform.runLater(() -> {
+//                            btn_login.setDisable(false);
+//                        });
+//                    }
+//                }, 5000);
+//
+//            }
+//            }catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//
+//            if ((this.i) % 3 == 0) {
+//                this.j = this.j * 2;
+//
+//                btn_login.setDisable(true);
+//                Timer timer = new Timer();
+//                timer.schedule(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        Platform.runLater(() -> {
+//                            btn_login.setDisable(false);
+//                        });
+//                    }
+//                }, j);
+//
+//            }
+//
+//        }
+//
+//        }
+     @FXML
+      private void login(ActionEvent event) throws Exception {
+              this.i = this.i + 1 ;
+        con = MyConnection.getInstance().getCnx();
         try {
-            String sql = "SELECT * FROM login where email LIKE '"+email.getText()+"' AND mdp like  '"+pwd.getText() +"'";
+
+            String sql = "SELECT * FROM login where email like ? AND mdp like ? ";
             ps = con.prepareCall(sql);
             Utilisateur p = new Utilisateur();
-            boolean b = false; 
-            b = ps.execute();
-            rs = ps.executeQuery(sql);
-            if (b){
-            
-             String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+            ps.setString(1, email.getText());
+            ps.setString(2, pwd.getText());
+            //ps.setInt(3, 1);
+
+            rs = ps.executeQuery();
+
+            String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
             Pattern pattern = Pattern.compile(regex);
-
-            if (email.getText().isEmpty() || pwd.getText().isEmpty() || !email.getText().matches(regex) || pwd.getText().length() < 8) {
-
-                JOptionPane.showMessageDialog(null, "Veuillez vérifier vos données");
+            
+            if (email.getText().isEmpty() || pwd.getText().isEmpty() || !email.getText().matches(regex)  || pwd.getText().length() < 8) {
+               
+                    JOptionPane.showMessageDialog(null, "Veuillez vérifier vos données");
 
             } else {
                 if (email.getText().equals("admin@admin.com") && pwd.getText().equals("adminadmin")) {
@@ -98,146 +220,124 @@ public class LoginController implements Initializable {
                     Scene scene = new Scene(root);
                     mainStage.setScene(scene);
                     mainStage.show();
-                }
-                else if (email.getText().equals("personnel@personnel.com") && pwd.getText().equals("personnel123")){
-                JOptionPane.showMessageDialog(null, "Connexion etablie");
+                } 
+                else if (email.getText().equals("personnel@personnel.com") && pwd.getText().equals("personnel123")) {
+                        JOptionPane.showMessageDialog(null, "Connexion etablie");
 
-                    btn_login.getScene().getWindow().hide();
-                    Parent root = FXMLLoader.load(getClass().getResource("ListPersonnel.fxml"));
+                        btn_login.getScene().getWindow().hide();
+                    Parent root = FXMLLoader.load(getClass().getResource("listPersonnel.fxml"));
                     Stage mainStage = new Stage();
                     Scene scene = new Scene(root);
                     mainStage.setScene(scene);
                     mainStage.show();
-                
-                }
-                else {
-                    
-                    if (rs.next()) {
-//
-//                        JOptionPane.showMessageDialog(null, "Connexion etablie");
-//                        
-//
-//                        btn_login.getScene().getWindow().hide();
-//
-//                        FXMLLoader loader = new FXMLLoader();
-//                        loader.setLocation(getClass().getResource("ProfilU.fxml"));
-//                        loader.load();
-//                        ProfilUController updateProfil = loader.getController();
-//                        updateProfil.setUpdate(true);
-//                        updateProfil.setLabel(email.getText(), rs.getString("nom"), rs.getString("prenom"), rs.getString("dn"));
-//                        Parent parent = loader.getRoot();
-//                        Stage stage = new Stage();
-//                        stage.setScene(new Scene(parent));
-//                        stage.initStyle(StageStyle.UTILITY);
-//                        stage.show();
-
-                        JOptionPane.showMessageDialog(null, "Connexion etablie");
+                       
                         
 
-                        btn_login.getScene().getWindow().hide();
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("../../panier/Views/InterfaceMenu.fxml"));
-                        loader.load();
-                        Parent parent = loader.getRoot();
-                        Stage stage = new Stage();
-                        stage.setScene(new Scene(parent));
-                        stage.show();
-                    } else {
+                    }
+                else 
+                {
+                    if (rs.next()) {
 
-                        JOptionPane.showMessageDialog(null, "Connexion echouée");
+                    JOptionPane.showMessageDialog(null, "Connexion etablie");
+
+                    btn_login.getScene().getWindow().hide();
+                    Parent root = FXMLLoader.load(getClass().getResource("../../panier/Views/InterfaceMenu.fxml"));
+                    Stage mainStage = new Stage();
+                    Scene scene = new Scene(root);
+                    mainStage.setScene(scene);
+                    mainStage.show();
+//                            FXMLLoader loader = new FXMLLoader ();
+//                            loader.setLocation(getClass().getResource("/../../panier/Views/InterfaceMenu.fxml"));
+//                            loader.load();
+////                            ProfilUController updateProfil = loader.getController();
+////                            updateProfil.setUpdate(true);
+////                            updateProfil.setLabel(email.getText(),rs.getString("nom"),rs.getString("prenom"),rs.getString("dn"));
+//                            Parent parent = loader.getRoot();
+//                            Stage stage = new Stage();
+//                            stage.setScene(new Scene(parent));
+//                            stage.initStyle(StageStyle.UTILITY);
+//                            stage.show();
+                            
+                    }else {
+                    
+                    JOptionPane.showMessageDialog(null, "Connexion echouée");
+                      if ((this.i) % 3 == 0) {
+                                this.j = this.j * 2;
+
+                                btn_login.setDisable(true);
+                                Timer timer = new Timer();
+                                timer.schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        Platform.runLater(() -> {
+                                            btn_login.setDisable(false);
+                                        });
+                                    }
+                                }, j);
+
                     }
 
                 }
+                }
 
             }
 
-            
-            }
-            else {
-                            btn_login.setDisable(true);
-            Timer timer = new Timer();
-    timer.schedule(new TimerTask() {
-        @Override
-        public void run() {
-            Platform.runLater(() -> {
-               btn_login.setDisable(false);
-            });
-        }
-    }, 5000);
-  
-            
-            }
-
-           
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-
-
-            if ((this.i) % 3 == 0) {
-                                this.j = this.j * 2 ;
-
-                  btn_login.setDisable(true);
-            Timer timer = new Timer();
-    timer.schedule(new TimerTask() {
-        @Override
-        public void run() {
-            Platform.runLater(() -> {
-               btn_login.setDisable(false);
-            });
         }
-    }, j);
-    
-            
-            
+
+    }
+
+
+  
+
+        @FXML
+        private void mdpOublier
+        (MouseEvent event
+        
+            ) {
+        try {
+                motOublier.getScene().getWindow().hide();
+                Parent root = FXMLLoader.load(getClass().getResource("MdpOublier.fxml"));
+                Stage mainStage = new Stage();
+                Scene scene = new Scene(root);
+                mainStage.setScene(scene);
+                mainStage.show();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, ex);
             }
-      
+        }
 
+        @FXML
+        private void Inscription
+        (MouseEvent event
         
-        }
-
-    }
-
-  
-
-    @FXML
-    private void mdpOublier(MouseEvent event) {
-         try {
-            motOublier.getScene().getWindow().hide();
-            Parent root = FXMLLoader.load(getClass().getResource("MdpOublier.fxml"));
-            Stage mainStage = new Stage();
-            Scene scene = new Scene(root);
-            mainStage.setScene(scene);
-            mainStage.show();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-
-    @FXML
-    private void Inscription(MouseEvent event) {
-    }
-
-    @FXML
-    private void Inscrit(ActionEvent event) {
         
-         try {
-            btn_inscrire.getScene().getWindow().hide();
-            Parent root = FXMLLoader.load(getClass().getResource("Inscription.fxml"));
-            Stage mainStage = new Stage();
-            Scene scene = new Scene(root);
-            mainStage.setScene(scene);
-            mainStage.show();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
+        ) {
     }
 
-    void setEnabled() {
+    @FXML
+        private void Inscrit
+        (ActionEvent event
+        
+            ) {
+
+        try {
+                btn_inscrire.getScene().getWindow().hide();
+                Parent root = FXMLLoader.load(getClass().getResource("Inscription.fxml"));
+                Stage mainStage = new Stage();
+                Scene scene = new Scene(root);
+                mainStage.setScene(scene);
+                mainStage.show();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }
+
+        void setEnabled
+        
+            () {
         this.btn_login.setDisable(false);
+        }
+
     }
-
-    
-
-  
-
-}

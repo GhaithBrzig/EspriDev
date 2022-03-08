@@ -216,7 +216,7 @@ public boolean genererQR(ArrayList<Panier> u,Commande c) throws IOException{
                         }
                     }
                 }
-                if (ImageIO.write(bufferedImage, "png", new File("C:/Users/broum/Desktop/java/PIDEVO/src/QrCodes/" + code+c.getId() + ".png"))) {
+                if (ImageIO.write(bufferedImage, "png", new File("C:\\Users\\gayth\\" + code+c.getId() + ".png"))) {
                     System.out.println("-- saved");
                 }
                   Notification notification = Notifications.SUCCESS;

@@ -25,5 +25,6 @@
       <Label layoutX="211.0" layoutY="154.0" text="Age:" />
       <Label fx:id="age" layoutX="255.0" layoutY="154.0" prefHeight="17.0" prefWidth="91.0" />
       <Button fx:id="btn_deconn" layoutX="330.0" layoutY="269.0" mnemonicParsing="false" onAction="#deconnecter" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Déconnecter" />
+      <Button fx:id="btn_back" layoutX="489.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Fermer" />
    </children>
 </AnchorPane>

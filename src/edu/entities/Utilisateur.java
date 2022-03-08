@@ -47,7 +47,8 @@ public class Utilisateur {
         this.role = role;
     }
 
-    public Utilisateur(String nom) {
+    public Utilisateur(int id_util,String nom) {
+          this.id_util = id_util;
         this.nom = nom;
     }
     

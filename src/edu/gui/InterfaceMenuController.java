@@ -18,6 +18,9 @@ import Services.PanierService;
 import Services.ProduitCRUD;
 import Services.ProduitService;
 import animatefx.animation.ZoomIn;
+import com.github.plushaze.traynotification.notification.Notification;
+import com.github.plushaze.traynotification.notification.Notifications;
+import com.github.plushaze.traynotification.notification.TrayNotification;
 import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -49,6 +52,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -532,6 +536,14 @@ public class InterfaceMenuController implements Initializable {
             boolean test = ps.ajouterPanier(prod, u, Quantite);
             if (test) {
                 refreshPanier();
+                   Notification notification = Notifications.SUCCESS;
+        TrayNotification tray = new TrayNotification();
+        tray.setTitle("Plat Ajouté!");
+        tray.setMessage("Merci!");
+        tray.setNotification(notification);
+        tray.showAndDismiss(Duration.seconds(6));
+             
+        }
                 Alert aler = new Alert(Alert.AlertType.INFORMATION);
                 aler.setTitle("Panier");
                 aler.setHeaderText("Plat ajout");

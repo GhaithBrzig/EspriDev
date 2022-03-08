@@ -77,6 +77,9 @@ public class ListController implements Initializable {
     ObservableList<Utilisateur> PersonneList = FXCollections.observableArrayList();
     @FXML
     private Button btn_deconn;
+    private Button btn_delete;
+    @FXML
+    private Button btn_back;
 
     /**
      * Initializes the controller class.
@@ -193,15 +196,18 @@ public class ListController implements Initializable {
 
     @FXML
     private void deconnecter(ActionEvent event) throws IOException {
-        int opt = JOptionPane.showConfirmDialog(null, "Vous êtes sur?", "Supprimer", JOptionPane.YES_NO_OPTION);
-    if(opt==0){
-        btn_deconn.getScene().getWindow().hide();
-                 Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-                 Stage mainStage = new Stage();
-                 Scene scene = new Scene(root);
-                 mainStage.setScene(scene);
-                 mainStage.show();
+     btn_back.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AdminMenu.fxml"));
+        loader.load();
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
+    
     }
+    void setDisabled() {
+        this.btn_delete.setDisable(true);
     }
     
 }

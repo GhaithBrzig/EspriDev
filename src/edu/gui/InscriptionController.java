@@ -7,6 +7,7 @@ package edu.gui;
 
 import edu.entities.Utilisateur;
 import edu.utils.MyConnection;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -66,12 +67,17 @@ public class InscriptionController implements Initializable {
         String verifAccount = "Select * from login where email = ?";
         PreparedStatement ps = cnx2.prepareStatement(verifAccount);
         ps.setString (1,email.getText());
-        boolean b = false; 
-        b = ps.execute();
-      /*  if(b){
+        rs =  ps.executeQuery();
+        if(rs.next()){
         JOptionPane.showMessageDialog(null, "Compte déjà existe");
-            }**/
-      //  else{
+            }
+        else{
+             String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+            Pattern pattern = Pattern.compile(regex);
+                        if (nom.getText().isEmpty() || prenom.getText().isEmpty() || dn.getValue().toString().isEmpty() || numtel.getText().isEmpty() || email.getText().isEmpty() || pwd.getText().isEmpty() || !email.getText().matches(regex) || pwd.getText().length() < 8) 
+
+                JOptionPane.showMessageDialog(null, "Veuillez vérifier vos données");
+         else {
         try {
 
             String requete = " INSERT INTO login (id, nom, prenom, numtel,dn, email, mdp) VALUES (?,?,?,?,?,?,?)";
@@ -87,14 +93,10 @@ public class InscriptionController implements Initializable {
 
             pstt.executeUpdate();
 
-            String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-            Pattern pattern = Pattern.compile(regex);
+           
 
-            if (nom.getText().isEmpty() || prenom.getText().isEmpty() || dn.getValue().toString().isEmpty() || numtel.getText().isEmpty() || email.getText().isEmpty() || pwd.getText().isEmpty() || !email.getText().matches(regex) || pwd.getText().length() < 8) {
 
-                JOptionPane.showMessageDialog(null, "Veuillez vérifier vos données");
-
-            } else {
+             
 
                 JOptionPane.showMessageDialog(null, "Compte créée!");
 
@@ -104,13 +106,15 @@ public class InscriptionController implements Initializable {
                  Scene scene = new Scene(root);
                  mainStage.setScene(scene);
                  mainStage.show();
-            }
+            
+                
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+                        }
         
 
-    
+    }
     }
 
     @FXML
@@ -122,5 +126,4 @@ public class InscriptionController implements Initializable {
                  mainStage.setScene(scene);
                  mainStage.show();
     }
-
 }

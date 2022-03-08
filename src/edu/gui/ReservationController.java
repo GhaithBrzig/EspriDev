@@ -56,6 +56,8 @@ public class ReservationController implements Initializable {
         evenementCRUD CR = new evenementCRUD();
         ObservableList<Integer> listID = CR.ListId();
         ResIDev.setItems(listID);
+        reservationCRUD rc = new reservationCRUD();
+        rc.archiverReservation();
     }
 
     @FXML
